@@ -1,0 +1,17 @@
+uuid: ac8abfe7-7f0e-412c-b877-4e67dd48b3fa
+langcode: fr
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Événement
+type: event
+description: 'Événements et manifestations.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

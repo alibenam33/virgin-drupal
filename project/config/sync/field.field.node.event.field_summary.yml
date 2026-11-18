@@ -1,0 +1,26 @@
+uuid: f353a71a-3621-4594-9cc9-38cf03f9537b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_summary
+    - filter.format.basic_html
+    - node.type.event
+  module:
+    - text
+id: node.event.field_summary
+field_name: field_summary
+entity_type: node
+bundle: event
+label: Résumé
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats:
+    - basic_html
+field_type: text_with_summary

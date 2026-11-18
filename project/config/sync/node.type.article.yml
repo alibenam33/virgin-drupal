@@ -1,0 +1,17 @@
+uuid: 69497c1b-3827-44ce-865d-f442c9ea7ee3
+langcode: fr
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Article
+type: article
+description: 'Contenus éditoriaux et articles.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

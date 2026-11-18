@@ -6,7 +6,7 @@
       "Glob",
       "Agent"
     ],
-    "ask": [],
+    "ask": [], 
     "deny": [
       "Read(./docs/files/tk.txt)"
     ]

@@ -1,0 +1,17 @@
+uuid: 745cb0b5-b8de-4c65-95c5-a2e5e635b9e5
+langcode: fr
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Actualité
+type: news
+description: 'Actualités et communications.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

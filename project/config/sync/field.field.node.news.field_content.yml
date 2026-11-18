@@ -1,0 +1,113 @@
+uuid: 676c81b6-675c-4c01-844e-22ecc2576a2d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content
+    - node.type.news
+    - paragraphs.paragraphs_type.accordion
+    - paragraphs.paragraphs_type.call_to_action
+    - paragraphs.paragraphs_type.cards_grid
+    - paragraphs.paragraphs_type.contact
+    - paragraphs.paragraphs_type.downloads
+    - paragraphs.paragraphs_type.embed
+    - paragraphs.paragraphs_type.hero
+    - paragraphs.paragraphs_type.image
+    - paragraphs.paragraphs_type.image_gallery
+    - paragraphs.paragraphs_type.quote
+    - paragraphs.paragraphs_type.separator
+    - paragraphs.paragraphs_type.tabs
+    - paragraphs.paragraphs_type.testimonial
+    - paragraphs.paragraphs_type.text_content
+    - paragraphs.paragraphs_type.video
+  module:
+    - entity_reference_revisions
+id: node.news.field_content
+field_name: field_content
+entity_type: node
+bundle: news
+label: 'Contenu de la page'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      accordion: accordion
+      call_to_action: call_to_action
+      cards_grid: cards_grid
+      contact: contact
+      downloads: downloads
+      embed: embed
+      hero: hero
+      image: image
+      image_gallery: image_gallery
+      quote: quote
+      separator: separator
+      tabs: tabs
+      testimonial: testimonial
+      text_content: text_content
+      video: video
+    negate: 0
+    target_bundles_drag_drop:
+      accordion:
+        weight: 20
+        enabled: true
+      accordion_item:
+        weight: 21
+        enabled: false
+      call_to_action:
+        weight: 22
+        enabled: true
+      card:
+        weight: 23
+        enabled: false
+      cards_grid:
+        weight: 24
+        enabled: true
+      contact:
+        weight: 25
+        enabled: true
+      download_item:
+        weight: 27
+        enabled: false
+      downloads:
+        weight: 26
+        enabled: true
+      embed:
+        weight: 28
+        enabled: true
+      hero:
+        weight: 29
+        enabled: true
+      image:
+        weight: 30
+        enabled: true
+      image_gallery:
+        weight: 31
+        enabled: true
+      quote:
+        weight: 32
+        enabled: true
+      separator:
+        weight: 33
+        enabled: true
+      tab_item:
+        weight: 35
+        enabled: false
+      tabs:
+        weight: 34
+        enabled: true
+      testimonial:
+        weight: 36
+        enabled: true
+      text_content:
+        weight: 37
+        enabled: true
+      video:
+        weight: 38
+        enabled: true
+field_type: entity_reference_revisions

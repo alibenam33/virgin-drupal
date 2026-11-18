@@ -1,0 +1,50 @@
+uuid: 1ef25be9-8344-4193-9d96-884b6bd52be5
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_address
+    - node.type.event
+  module:
+    - address
+id: node.event.field_address
+field_name: field_address
+entity_type: node
+bundle: event
+label: Adresse
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  available_countries:
+    FR: FR
+  langcode_override: ''
+  field_overrides:
+    givenName:
+      override: hidden
+    additionalName:
+      override: hidden
+    familyName:
+      override: hidden
+    organization:
+      override: hidden
+    addressLine1:
+      override: required
+    addressLine2:
+      override: optional
+    addressLine3:
+      override: hidden
+    postalCode:
+      override: required
+    sortingCode:
+      override: hidden
+    dependentLocality:
+      override: hidden
+    locality:
+      override: required
+    administrativeArea:
+      override: hidden
+  fields: {  }
+field_type: address

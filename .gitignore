@@ -1,6 +1,7 @@
 # --- Local, non-versioned folders ---
 /docs/files/
 /.lando/
+/scripts/
 
 # Claude Code — configuration locale
 .claude/settings.local.json
