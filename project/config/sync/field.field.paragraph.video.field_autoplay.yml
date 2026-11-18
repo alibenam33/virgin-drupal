@@ -1,0 +1,21 @@
+uuid: 21ebc93e-d113-40c6-8dec-4b9e7e0dd090
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_autoplay
+    - paragraphs.paragraphs_type.video
+id: paragraph.video.field_autoplay
+field_name: field_autoplay
+entity_type: paragraph
+bundle: video
+label: 'Lecture automatique'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: Activé
+  off_label: Désactivé
+field_type: boolean

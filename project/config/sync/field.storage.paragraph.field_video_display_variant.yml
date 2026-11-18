@@ -1,0 +1,30 @@
+uuid: a4d3de3b-d965-4cfc-86aa-1f98a9aaa801
+langcode: fr
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_video_display_variant
+field_name: field_video_display_variant
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: default
+      label: Default
+    -
+      value: full_width
+      label: 'Full Width'
+    -
+      value: contained
+      label: Contained
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

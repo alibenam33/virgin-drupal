@@ -1,0 +1,33 @@
+uuid: 75083dbd-83a0-4a59-a278-156df358e8b4
+langcode: fr
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_cta_display_variant
+field_name: field_cta_display_variant
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: primary
+      label: Primary
+    -
+      value: secondary
+      label: Secondary
+    -
+      value: highlight
+      label: Highlight
+    -
+      value: image_background
+      label: 'Image background'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

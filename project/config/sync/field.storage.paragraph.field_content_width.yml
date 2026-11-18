@@ -1,0 +1,33 @@
+uuid: 6de1371a-c1bf-4db4-bf99-f66e1db15640
+langcode: fr
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_content_width
+field_name: field_content_width
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: narrow
+      label: Narrow
+    -
+      value: medium
+      label: Medium
+    -
+      value: wide
+      label: Wide
+    -
+      value: full
+      label: Full
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

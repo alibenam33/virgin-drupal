@@ -1,0 +1,42 @@
+# --- Local, non-versioned folders ---
+/docs/
+/.lando/
+
+# --- Composer-managed dependencies (reinstalled with `composer install`) ---
+/project/vendor/
+/project/web/core/
+/project/web/modules/contrib/
+/project/web/themes/contrib/
+/project/web/profiles/contrib/
+/project/web/libraries/
+/project/web/private/
+/project/drush/Commands/contrib/
+
+# --- Drupal site files and local settings ---
+/project/web/sites/*/files/
+/project/web/sites/*/private/
+/project/web/sites/*/settings.php
+/project/web/sites/*/settings.local.php
+/project/web/sites/*/services.local.yml
+/project/web/sites/simpletest/
+
+# --- Environment, logs and dumps ---
+.env
+.env.local
+*.log
+*.sql
+*.sql.gz
+
+# --- Tooling caches ---
+.phpunit.result.cache
+.phpcs-cache
+/project/.phpstan/
+node_modules/
+
+# --- OS and IDE files ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~

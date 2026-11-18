@@ -1,0 +1,10 @@
+uuid: f739caac-bc52-45ab-bb3a-3ff944add81b
+langcode: fr
+status: true
+dependencies: {  }
+id: hero
+label: 'Hero / Bannière principale'
+icon_uuid: null
+icon_default: null
+description: "Le composant d'introduction d'une page. Il permet de présenter un titre, un texte introductif, une image et éventuellement un bouton d'action."
+behavior_plugins: {  }

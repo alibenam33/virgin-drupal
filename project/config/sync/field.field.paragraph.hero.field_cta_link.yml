@@ -1,0 +1,23 @@
+uuid: af771dfb-f924-4d9f-a26d-15b24414122e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cta_link
+    - paragraphs.paragraphs_type.hero
+  module:
+    - link
+id: paragraph.hero.field_cta_link
+field_name: field_cta_link
+entity_type: paragraph
+bundle: hero
+label: 'Lien du bouton'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 17
+field_type: link

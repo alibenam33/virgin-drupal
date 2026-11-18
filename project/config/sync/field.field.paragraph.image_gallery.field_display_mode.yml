@@ -1,0 +1,21 @@
+uuid: 2a2f962c-96aa-4e24-a9d4-f38501cec6c9
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_display_mode
+    - paragraphs.paragraphs_type.image_gallery
+  module:
+    - options
+id: paragraph.image_gallery.field_display_mode
+field_name: field_display_mode
+entity_type: paragraph
+bundle: image_gallery
+label: "Mode d'affichage"
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

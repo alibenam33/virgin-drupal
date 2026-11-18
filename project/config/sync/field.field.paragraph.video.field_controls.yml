@@ -1,0 +1,21 @@
+uuid: 3cb9fce2-bc9a-46cf-812c-a36416385f56
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_controls
+    - paragraphs.paragraphs_type.video
+id: paragraph.video.field_controls
+field_name: field_controls
+entity_type: paragraph
+bundle: video
+label: 'Afficher les contrôles'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: Activé
+  off_label: Désactivé
+field_type: boolean

@@ -1,0 +1,10 @@
+uuid: bfe54cea-3c2a-4dde-87cf-04b508ead16f
+langcode: fr
+status: true
+dependencies: {  }
+id: video
+label: Vidéo
+icon_uuid: null
+icon_default: null
+description: "Intégration d'une vidéo locale ou externe."
+behavior_plugins: {  }

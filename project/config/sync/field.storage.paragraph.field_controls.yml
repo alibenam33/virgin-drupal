@@ -1,0 +1,18 @@
+uuid: c3609cee-e9e7-4286-87bb-b380a8ec6907
+langcode: fr
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_controls
+field_name: field_controls
+entity_type: paragraph
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,21 @@
+uuid: 73c11d71-40a1-41b4-b5a3-42ba08890b5e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_content_width
+    - paragraphs.paragraphs_type.text_content
+  module:
+    - options
+id: paragraph.text_content.field_content_width
+field_name: field_content_width
+entity_type: paragraph
+bundle: text_content
+label: 'Largeur de contenu'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

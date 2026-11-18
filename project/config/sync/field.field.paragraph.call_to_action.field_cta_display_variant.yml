@@ -1,0 +1,21 @@
+uuid: 633416ef-ef33-4968-9568-31904c5d17d1
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cta_display_variant
+    - paragraphs.paragraphs_type.call_to_action
+  module:
+    - options
+id: paragraph.call_to_action.field_cta_display_variant
+field_name: field_cta_display_variant
+entity_type: paragraph
+bundle: call_to_action
+label: "Variante d'affichage"
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

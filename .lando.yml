@@ -1,0 +1,64 @@
+name: virgin-drupal
+recipe: drupal10
+config:
+  php: '8.4'
+  # Drush is provided by the project (composer.json: drush/drush ^13).
+  drush: ^13
+  composer_version: 2-latest
+  webroot: project/web
+services:
+  # MySQL database service.
+  database:
+    type: mysql:8.4
+    portforward: 3310
+    # Lando's default mysql8.cnf uses expire_logs_days, removed in MySQL 8.4.
+    config:
+      database: .lando/mysql.cnf
+    # Local-only credentials (Lando container, never used in production).
+    creds:
+      user: vd_user
+      password: khO4Xk0PmQqn0mRzLIy4wZ
+      database: vd_database
+
+  # phpMyAdmin interface.
+  phpmyadmin:
+    type: phpmyadmin
+    hosts:
+      - database
+
+  # MailHog local SMTP catcher.
+  mailhog:
+    type: mailhog:v1.0.0
+    portforward: true
+    hogfrom:
+      - appserver
+
+tooling:
+  composer:
+    service: appserver
+    cmd: composer
+  php:
+    service: appserver
+    cmd: php
+  mysql:
+    service: database
+    cmd: mysql -u vd_user -pkhO4Xk0PmQqn0mRzLIy4wZ vd_database
+  drush:
+    service: appserver
+    cmd: /app/project/vendor/bin/drush
+  phpunit:
+    service: appserver
+    description: Run PHPUnit tests (config phpunit.xml.dist)
+    cmd: /app/vendor/bin/phpunit -c /app/phpunit.xml.dist
+  phpcs:
+    service: appserver
+    description: Check Drupal coding standards (config phpcs.xml.dist)
+    cmd: /app/vendor/bin/phpcs
+  phpcbf:
+    service: appserver
+    description: Auto-fix coding standards violations
+    cmd: /app/vendor/bin/phpcbf
+  phpstan:
+    service: appserver
+    description: Static analysis (config phpstan.neon.dist)
+    cmd: /app/vendor/bin/phpstan analyse --memory-limit=1G

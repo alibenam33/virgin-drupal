@@ -1,0 +1,21 @@
+uuid: b372d5ca-43e7-4a31-9aba-267b293c2657
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_image_display_variant
+    - paragraphs.paragraphs_type.image
+  module:
+    - options
+id: paragraph.image.field_image_display_variant
+field_name: field_image_display_variant
+entity_type: paragraph
+bundle: image
+label: "Variante d'affichage"
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

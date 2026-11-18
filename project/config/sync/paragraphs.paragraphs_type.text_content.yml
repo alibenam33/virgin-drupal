@@ -1,0 +1,10 @@
+uuid: 975ef9df-547c-4b82-9a98-9646689c8f13
+langcode: fr
+status: true
+dependencies: {  }
+id: text_content
+label: 'Texte / Contenu éditorial'
+icon_uuid: null
+icon_default: null
+description: "Bloc éditorial classique permettant d'intégrer du texte riche."
+behavior_plugins: {  }

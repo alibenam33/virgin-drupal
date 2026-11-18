@@ -1,0 +1,21 @@
+uuid: 414fddb8-6051-402b-b629-9e3bfd3283fd
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_video_display_variant
+    - paragraphs.paragraphs_type.video
+  module:
+    - options
+id: paragraph.video.field_video_display_variant
+field_name: field_video_display_variant
+entity_type: paragraph
+bundle: video
+label: "Variante d'affichage"
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

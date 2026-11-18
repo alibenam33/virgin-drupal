@@ -1,0 +1,19 @@
+uuid: 37e603df-28ff-4c55-8094-ac6b39c69598
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_eyebrow
+    - paragraphs.paragraphs_type.text_content
+id: paragraph.text_content.field_eyebrow
+field_name: field_eyebrow
+entity_type: paragraph
+bundle: text_content
+label: Surtitre
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

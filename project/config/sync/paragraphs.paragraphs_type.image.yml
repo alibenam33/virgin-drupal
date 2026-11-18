@@ -1,0 +1,10 @@
+uuid: 698928ef-06eb-4397-a75a-f737a8935d26
+langcode: fr
+status: true
+dependencies: {  }
+id: image
+label: 'Image / Visuel'
+icon_uuid: null
+icon_default: null
+description: "Affichage d'une image avec légende éventuelle."
+behavior_plugins: {  }

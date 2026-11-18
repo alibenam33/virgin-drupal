@@ -1,0 +1,10 @@
+uuid: 8e42adf6-ce93-49ed-b119-e13a9c84b45b
+langcode: fr
+status: true
+dependencies: {  }
+id: image_gallery
+label: "Galerie d'images"
+icon_uuid: null
+icon_default: null
+description: 'Affichage de plusieurs images.'
+behavior_plugins: {  }

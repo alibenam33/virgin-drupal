@@ -1,0 +1,21 @@
+uuid: 5844e7f3-1cf5-414b-9f6f-99d948a8a6f6
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_alignment
+    - paragraphs.paragraphs_type.call_to_action
+  module:
+    - options
+id: paragraph.call_to_action.field_alignment
+field_name: field_alignment
+entity_type: paragraph
+bundle: call_to_action
+label: Alignement
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

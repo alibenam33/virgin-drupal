@@ -1,0 +1,23 @@
+uuid: f6079ed2-16ca-4cb9-952a-fbb0b72f0a0a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_columns
+    - paragraphs.paragraphs_type.image_gallery
+id: paragraph.image_gallery.field_columns
+field_name: field_columns
+entity_type: paragraph
+bundle: image_gallery
+label: 'Nombre de colonnes'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 2
+  max: 4
+  prefix: ''
+  suffix: ''
+field_type: integer

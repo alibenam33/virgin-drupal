@@ -1,0 +1,21 @@
+uuid: 74cf4d96-ef46-4acf-9eae-de7aa7953918
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_enable_lightbox
+    - paragraphs.paragraphs_type.image_gallery
+id: paragraph.image_gallery.field_enable_lightbox
+field_name: field_enable_lightbox
+entity_type: paragraph
+bundle: image_gallery
+label: 'Activer la visionneuse'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: Activé
+  off_label: Désactivé
+field_type: boolean

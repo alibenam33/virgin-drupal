@@ -1,0 +1,10 @@
+uuid: f5431d33-eb9d-42ea-ae12-375e8698df6f
+langcode: fr
+status: true
+dependencies: {  }
+id: call_to_action
+label: 'Call to Action'
+icon_uuid: null
+icon_default: null
+description: "Mise en avant d'une action."
+behavior_plugins: {  }

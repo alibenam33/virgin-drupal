@@ -1,0 +1,33 @@
+uuid: 3587bf6a-e351-4c84-b1f7-bff4297d388e
+langcode: fr
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_image_display_variant
+field_name: field_image_display_variant
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: full_width
+      label: 'Full Width'
+    -
+      value: contained
+      label: Contained
+    -
+      value: rounded
+      label: Rounded
+    -
+      value: framed
+      label: Framed
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

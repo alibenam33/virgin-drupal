@@ -1,0 +1,21 @@
+uuid: 98568bb0-2b42-4e20-9620-58b25984a0ea
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_content_alignment
+    - paragraphs.paragraphs_type.hero
+  module:
+    - options
+id: paragraph.hero.field_content_alignment
+field_name: field_content_alignment
+entity_type: paragraph
+bundle: hero
+label: 'Alignement du contenu'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string
