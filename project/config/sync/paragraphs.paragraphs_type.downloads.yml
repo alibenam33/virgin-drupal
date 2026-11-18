@@ -1,0 +1,10 @@
+uuid: 995b54af-65e9-4eb3-bbb5-6a795ad48f8a
+langcode: fr
+status: true
+dependencies: {  }
+id: downloads
+label: 'Documents à télécharger'
+icon_uuid: null
+icon_default: null
+description: 'Plusieurs fichiers proposés au téléchargement.'
+behavior_plugins: {  }

@@ -1,0 +1,10 @@
+uuid: 45e3ceb5-4e1d-4cee-9c1d-ce4958b39620
+langcode: fr
+status: true
+dependencies: {  }
+id: download_item
+label: Document
+icon_uuid: null
+icon_default: null
+description: 'Un fichier téléchargeable.'
+behavior_plugins: {  }

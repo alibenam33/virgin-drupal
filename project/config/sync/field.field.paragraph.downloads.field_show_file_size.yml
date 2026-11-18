@@ -1,0 +1,21 @@
+uuid: 6c102746-2660-42b4-8bf9-9ad9c646ea6f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_show_file_size
+    - paragraphs.paragraphs_type.downloads
+id: paragraph.downloads.field_show_file_size
+field_name: field_show_file_size
+entity_type: paragraph
+bundle: downloads
+label: 'Afficher la taille des fichiers'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: Activé
+  off_label: Désactivé
+field_type: boolean

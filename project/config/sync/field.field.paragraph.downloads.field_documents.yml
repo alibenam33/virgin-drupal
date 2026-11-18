@@ -1,0 +1,73 @@
+uuid: 5d2727ee-21a1-4561-aef4-07a24cb3a47a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_documents
+    - paragraphs.paragraphs_type.download_item
+    - paragraphs.paragraphs_type.downloads
+  module:
+    - entity_reference_revisions
+id: paragraph.downloads.field_documents
+field_name: field_documents
+entity_type: paragraph
+bundle: downloads
+label: Documents
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      download_item: download_item
+    negate: 0
+    target_bundles_drag_drop:
+      accordion:
+        weight: 16
+        enabled: false
+      accordion_item:
+        weight: 17
+        enabled: false
+      call_to_action:
+        weight: 18
+        enabled: false
+      card:
+        weight: 19
+        enabled: false
+      cards_grid:
+        weight: 20
+        enabled: false
+      download_item:
+        weight: 22
+        enabled: true
+      downloads:
+        weight: 21
+        enabled: false
+      hero:
+        weight: 23
+        enabled: false
+      image:
+        weight: 24
+        enabled: false
+      image_gallery:
+        weight: 25
+        enabled: false
+      quote:
+        weight: 26
+        enabled: false
+      tab_item:
+        weight: 28
+        enabled: false
+      tabs:
+        weight: 27
+        enabled: false
+      text_content:
+        weight: 29
+        enabled: false
+      video:
+        weight: 30
+        enabled: false
+field_type: entity_reference_revisions

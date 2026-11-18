@@ -1,0 +1,19 @@
+uuid: 95c604aa-2159-45b5-960f-f0c148445a0e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_role
+    - paragraphs.paragraphs_type.contact
+id: paragraph.contact.field_role
+field_name: field_role
+entity_type: paragraph
+bundle: contact
+label: Fonction
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,21 @@
+uuid: ec31d67a-b804-49c7-b168-59582ec2ce48
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_show_file_type
+    - paragraphs.paragraphs_type.downloads
+id: paragraph.downloads.field_show_file_type
+field_name: field_show_file_type
+entity_type: paragraph
+bundle: downloads
+label: 'Afficher le format des fichiers'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: Activé
+  off_label: Désactivé
+field_type: boolean

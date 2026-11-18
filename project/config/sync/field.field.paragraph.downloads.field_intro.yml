@@ -1,0 +1,24 @@
+uuid: bdb66a85-355a-409c-8542-3a64d45dbd67
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_intro
+    - filter.format.basic_html
+    - paragraphs.paragraphs_type.downloads
+  module:
+    - text
+id: paragraph.downloads.field_intro
+field_name: field_intro
+entity_type: paragraph
+bundle: downloads
+label: Introduction
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+field_type: text_long
