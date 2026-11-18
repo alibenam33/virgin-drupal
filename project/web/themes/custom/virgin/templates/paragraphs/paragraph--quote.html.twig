@@ -1,0 +1,58 @@
+{#
+/**
+ * @file
+ * Paragraph "Citation" (quote).
+ *
+ * List fields driving the display:
+ * - field_quote_display_variant: default (default) | highlight | bordered
+ *   -> paragraph--quote--{value}
+ */
+#}
+{{ attach_library('virgin/paragraphs') }}
+{% set variant = paragraph.field_quote_display_variant.value|default('default') %}
+{% set has_author = not paragraph.field_author.isEmpty() or not paragraph.field_author_role.isEmpty() or not paragraph.field_organization.isEmpty() %}
+{% set has_image = not paragraph.field_image.isEmpty() %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--quote',
+    'paragraph--quote--' ~ variant|clean_class,
+    has_image ? 'paragraph--has-image',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      <figure class="paragraph__figure">
+        <blockquote class="paragraph__quote">
+          <p>{{ content.field_quote }}</p>
+        </blockquote>
+        {% if has_author or has_image or not paragraph.field_link.isEmpty() %}
+          <figcaption class="paragraph__caption">
+            {% if has_image %}
+              <div class="paragraph__avatar">{{ content.field_image }}</div>
+            {% endif %}
+            <div class="paragraph__attribution">
+              {% if not paragraph.field_author.isEmpty() %}
+                <span class="paragraph__author">{{ content.field_author }}</span>
+              {% endif %}
+              {% if not paragraph.field_author_role.isEmpty() %}
+                <span class="paragraph__role">{{ content.field_author_role }}</span>
+              {% endif %}
+              {% if not paragraph.field_organization.isEmpty() %}
+                <span class="paragraph__organization">{{ content.field_organization }}</span>
+              {% endif %}
+              {% if not paragraph.field_link.isEmpty() %}
+                <span class="paragraph__source">{{ content.field_link }}</span>
+              {% endif %}
+            </div>
+          </figcaption>
+        {% endif %}
+      </figure>
+      {{ content|without('field_quote', 'field_author', 'field_author_role', 'field_organization', 'field_image', 'field_link', 'field_quote_display_variant') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

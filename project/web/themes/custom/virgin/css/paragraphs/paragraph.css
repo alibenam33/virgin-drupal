@@ -1,0 +1,261 @@
+/**
+ * @file
+ * Shared paragraph styles: rhythm, common elements and generic modifiers.
+ */
+
+.paragraph {
+  --paragraph-gap: var(--sp1-5);
+  --paragraph-radius: var(--border-radius);
+  --paragraph-surface: var(--color--gray-100);
+  --paragraph-border: var(--color--gray-90);
+
+  position: relative;
+  margin-block: var(--sp2);
+}
+
+@media (min-width: 700px) {
+  .paragraph {
+    margin-block: var(--sp3);
+  }
+}
+
+/* Nested paragraphs (cards, items) are spaced by their parent. */
+.paragraph .paragraph {
+  margin-block: 0;
+}
+
+.paragraph img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Common elements. */
+.paragraph__eyebrow {
+  margin-block: 0 var(--sp0-5);
+  color: var(--color-text-primary-medium);
+  font-size: var(--font-size-s);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.paragraph__title {
+  margin-block: 0 var(--sp1);
+  color: var(--color-text-neutral-loud);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h2.paragraph__title {
+  font-size: 1.75rem;
+}
+
+h3.paragraph__title {
+  font-size: 1.25rem;
+}
+
+@media (min-width: 700px) {
+  h2.paragraph__title {
+    font-size: 2.25rem;
+  }
+}
+
+.paragraph__header {
+  margin-block-end: var(--paragraph-gap);
+}
+
+.paragraph__intro,
+.paragraph__body {
+  color: var(--color-text-neutral-medium);
+}
+
+.paragraph__body > :last-child,
+.paragraph__intro > :last-child {
+  margin-block-end: 0;
+}
+
+.paragraph__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp0-75);
+  margin-block-start: var(--sp1);
+}
+
+.paragraph__button {
+  margin: 0;
+}
+
+.paragraph__media img {
+  width: 100%;
+}
+
+/* Decorative background layer (hero, call to action). */
+.paragraph__background {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+}
+
+.paragraph__background *:not(img) {
+  height: 100%;
+}
+
+.paragraph__background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.paragraph--has-background > .paragraph__inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Alignment modifiers (field_alignment, field_content_alignment). */
+.paragraph--align-left {
+  text-align: start;
+}
+
+.paragraph--align-center {
+  text-align: center;
+}
+
+.paragraph--align-right {
+  text-align: end;
+}
+
+.paragraph--align-center .paragraph__actions {
+  justify-content: center;
+}
+
+.paragraph--align-right .paragraph__actions {
+  justify-content: flex-end;
+}
+
+/* Width modifiers (field_content_width). */
+.paragraph--width-narrow > .paragraph__inner {
+  max-width: 40rem;
+}
+
+.paragraph--width-medium > .paragraph__inner {
+  max-width: 52rem;
+}
+
+.paragraph--width-wide > .paragraph__inner {
+  max-width: 72rem;
+}
+
+.paragraph--width-full > .paragraph__inner {
+  max-width: none;
+}
+
+.paragraph--align-center[class*="paragraph--width-"] > .paragraph__inner {
+  margin-inline: auto;
+}
+
+.paragraph--align-right[class*="paragraph--width-"] > .paragraph__inner {
+  margin-inline-start: auto;
+}
+
+/* Spacing modifiers (field_spacing_top / field_spacing_bottom). */
+.paragraph.paragraph--spacing-top-none {
+  margin-block-start: 0;
+}
+
+.paragraph.paragraph--spacing-top-small {
+  margin-block-start: var(--sp1);
+}
+
+.paragraph.paragraph--spacing-top-medium {
+  margin-block-start: var(--sp2);
+}
+
+.paragraph.paragraph--spacing-top-large {
+  margin-block-start: var(--sp4);
+}
+
+.paragraph.paragraph--spacing-top-extra-large {
+  margin-block-start: var(--sp6);
+}
+
+.paragraph.paragraph--spacing-bottom-none {
+  margin-block-end: 0;
+}
+
+.paragraph.paragraph--spacing-bottom-small {
+  margin-block-end: var(--sp1);
+}
+
+.paragraph.paragraph--spacing-bottom-medium {
+  margin-block-end: var(--sp2);
+}
+
+.paragraph.paragraph--spacing-bottom-large {
+  margin-block-end: var(--sp4);
+}
+
+.paragraph.paragraph--spacing-bottom-extra-large {
+  margin-block-end: var(--sp6);
+}
+
+/* Columns modifiers (field_columns), mobile first. */
+.paragraph__grid {
+  --paragraph-columns: 1;
+
+  display: grid;
+  grid-template-columns: repeat(var(--paragraph-columns), minmax(0, 1fr));
+  gap: var(--paragraph-gap);
+}
+
+@media (min-width: 700px) {
+  .paragraph--columns-2 > .paragraph__grid,
+  .paragraph--columns-3 > .paragraph__grid,
+  .paragraph--columns-4 > .paragraph__grid {
+    --paragraph-columns: 2;
+  }
+}
+
+@media (min-width: 1000px) {
+  .paragraph--columns-3 > .paragraph__grid {
+    --paragraph-columns: 3;
+  }
+
+  .paragraph--columns-4 > .paragraph__grid {
+    --paragraph-columns: 4;
+  }
+}
+
+/* Unpublished paragraphs (preview for editors). */
+.paragraph--unpublished {
+  outline: 2px dashed var(--color--red);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paragraph *,
+  .paragraph *::before,
+  .paragraph *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Reset Olivero's global figure / figcaption styles inside paragraphs. */
+.paragraph__figure {
+  margin: 0;
+  background: none;
+}
+
+.paragraph__caption {
+  padding: 0;
+  color: inherit;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-style: normal;
+  line-height: inherit;
+}

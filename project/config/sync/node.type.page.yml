@@ -1,0 +1,17 @@
+uuid: f8372342-6766-4fb2-b9a7-48434728948e
+langcode: fr
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Page
+type: page
+description: 'Pages institutionnelles et pages de présentation.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

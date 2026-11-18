@@ -1,0 +1,54 @@
+{#
+/**
+ * @file
+ * Paragraph "Carte" (card), child of "Grille de cartes".
+ *
+ * List fields driving the display:
+ * - field_card_display_variant: default (default) | horizontal | vertical
+ *   | bordered -> paragraph--card--{value}
+ *
+ * field_icon holds an icon name: it is exposed as a decorative element
+ * (class icon--{name} + data-icon) for the icon system of the theme.
+ */
+#}
+{{ attach_library('virgin/paragraphs') }}
+{% set variant = paragraph.field_card_display_variant.value|default('default') %}
+{% set has_image = not paragraph.field_image.isEmpty() %}
+{% set has_link = not paragraph.field_link.isEmpty() %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--card',
+    'paragraph--card--' ~ variant|clean_class,
+    has_image ? 'paragraph--has-image',
+    has_link ? 'paragraph--has-link',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% block paragraph %}
+  <article{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {% if has_image %}
+        <div class="paragraph__media">{{ content.field_image }}</div>
+      {% endif %}
+      <div class="paragraph__content">
+        {% if not paragraph.field_icon.isEmpty() %}
+          <span class="paragraph__icon icon icon--{{ paragraph.field_icon.value|clean_class }}" data-icon="{{ paragraph.field_icon.value }}" aria-hidden="true"></span>
+        {% endif %}
+        {% if not paragraph.field_eyebrow.isEmpty() %}
+          <p class="paragraph__eyebrow">{{ content.field_eyebrow }}</p>
+        {% endif %}
+        <h3 class="paragraph__title">{{ content.field_title }}</h3>
+        {% if not paragraph.field_description.isEmpty() %}
+          <div class="paragraph__body text-content">{{ content.field_description }}</div>
+        {% endif %}
+        {% if has_link %}
+          <div class="paragraph__actions">{{ content.field_link }}</div>
+        {% endif %}
+      </div>
+      {{ content|without('field_image', 'field_icon', 'field_eyebrow', 'field_title', 'field_description', 'field_link', 'field_card_display_variant') }}
+    {% endblock %}
+  </article>
+{% endblock paragraph %}

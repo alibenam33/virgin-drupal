@@ -1,0 +1,76 @@
+{#
+/**
+ * @file
+ * Paragraph "Coordonnées / Contact" (contact).
+ *
+ * No list field. Each piece of contact information is optional and only
+ * rendered when filled. The e-mail is exposed as a mailto: link.
+ */
+#}
+{{ attach_library('virgin/paragraphs') }}
+{% set has_image = not paragraph.field_image.isEmpty() %}
+{% set has_channels = not paragraph.field_phone.isEmpty() or not paragraph.field_email.isEmpty() or not paragraph.field_website.isEmpty() %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--contact',
+    has_image ? 'paragraph--has-image',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {% if not paragraph.field_title.isEmpty() %}
+        <h2 class="paragraph__title">{{ content.field_title }}</h2>
+      {% endif %}
+      <div class="paragraph__inner">
+        {% if has_image %}
+          <div class="paragraph__media">{{ content.field_image }}</div>
+        {% endif %}
+        <address class="paragraph__content">
+          {% if not paragraph.field_name.isEmpty() %}
+            <p class="paragraph__name">{{ content.field_name }}</p>
+          {% endif %}
+          {% if not paragraph.field_role.isEmpty() %}
+            <p class="paragraph__role">{{ content.field_role }}</p>
+          {% endif %}
+          {% if not paragraph.field_organization.isEmpty() %}
+            <p class="paragraph__organization">{{ content.field_organization }}</p>
+          {% endif %}
+          {% if not paragraph.field_address.isEmpty() %}
+            <div class="paragraph__address">{{ content.field_address }}</div>
+          {% endif %}
+          {% if has_channels %}
+            <ul class="paragraph__channels">
+              {% if not paragraph.field_phone.isEmpty() %}
+                <li class="paragraph__channel paragraph__channel--phone">
+                  <span class="paragraph__channel-label">{{ 'Phone'|t }}</span>
+                  {{ content.field_phone }}
+                </li>
+              {% endif %}
+              {% if not paragraph.field_email.isEmpty() %}
+                <li class="paragraph__channel paragraph__channel--email">
+                  <span class="paragraph__channel-label">{{ 'Email'|t }}</span>
+                  <a href="mailto:{{ paragraph.field_email.value }}">{{ content.field_email }}</a>
+                </li>
+              {% endif %}
+              {% if not paragraph.field_website.isEmpty() %}
+                <li class="paragraph__channel paragraph__channel--website">
+                  <span class="paragraph__channel-label">{{ 'Website'|t }}</span>
+                  {{ content.field_website }}
+                </li>
+              {% endif %}
+            </ul>
+          {% endif %}
+        </address>
+      </div>
+      {% if not paragraph.field_contact_link.isEmpty() %}
+        <div class="paragraph__actions">{{ content.field_contact_link }}</div>
+      {% endif %}
+      {{ content|without('field_title', 'field_image', 'field_name', 'field_role', 'field_organization', 'field_address', 'field_phone', 'field_email', 'field_website', 'field_contact_link') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

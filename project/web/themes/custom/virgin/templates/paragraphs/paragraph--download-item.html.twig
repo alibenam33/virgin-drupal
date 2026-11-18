@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Paragraph "Document" (download_item), child of "Documents à télécharger".
+ *
+ * No list field. The download link is the file link rendered by the
+ * document media (see templates/field/file-link.html.twig, which exposes
+ * the file type and size). field_link_label is displayed as the visual
+ * call to action; the whole item is clickable through the file link.
+ */
+#}
+{{ attach_library('virgin/paragraphs') }}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--download-item',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      <div class="paragraph__content">
+        <h3 class="paragraph__title">{{ content.field_title }}</h3>
+        {% if not paragraph.field_description.isEmpty() %}
+          <div class="paragraph__body text-content">{{ content.field_description }}</div>
+        {% endif %}
+        <div class="paragraph__file">{{ content.field_file }}</div>
+      </div>
+      {% if not paragraph.field_link_label.isEmpty() %}
+        <span class="paragraph__action" aria-hidden="true">{{ content.field_link_label }}</span>
+      {% endif %}
+      {{ content|without('field_title', 'field_description', 'field_file', 'field_link_label') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

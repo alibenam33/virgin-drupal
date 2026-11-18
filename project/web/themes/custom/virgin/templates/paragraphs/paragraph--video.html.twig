@@ -1,0 +1,69 @@
+{#
+/**
+ * @file
+ * Paragraph "Vidéo" (video).
+ *
+ * List fields driving the display:
+ * - field_video_display_variant: default (default) | full_width | contained
+ *   -> paragraph--video--{value}
+ * Display booleans:
+ * - field_autoplay -> paragraph--video--autoplay + data-autoplay
+ * - field_controls -> paragraph--video--controls + data-controls
+ * When a poster is set (and autoplay is off), virgin/paragraphs.video shows
+ * the poster with a play button over the player; without JavaScript the
+ * player is displayed directly.
+ *
+ * The remote video iframe title is provided by the oEmbed formatter.
+ */
+#}
+{{ attach_library('virgin/paragraphs') }}
+{% set variant = paragraph.field_video_display_variant.value|default('default') %}
+{% set autoplay = paragraph.field_autoplay.value ? true : false %}
+{% set controls = paragraph.field_controls.value ? true : false %}
+{% set has_poster = not paragraph.field_poster.isEmpty() and not autoplay %}
+{% if has_poster %}
+  {{ attach_library('virgin/paragraphs.video') }}
+{% endif %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--video',
+    'paragraph--video--' ~ variant|clean_class,
+    autoplay ? 'paragraph--video--autoplay',
+    controls ? 'paragraph--video--controls',
+    has_poster ? 'paragraph--has-poster',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes).setAttribute('data-autoplay', autoplay ? 'true' : 'false').setAttribute('data-controls', controls ? 'true' : 'false') }}>
+    {% block content %}
+      {% if not paragraph.field_title.isEmpty() %}
+        <h2 class="paragraph__title">{{ content.field_title }}</h2>
+      {% endif %}
+      <div class="paragraph__player">
+        <div class="paragraph__video">{{ content.field_video }}</div>
+        {% if has_poster %}
+          <div class="paragraph__poster" data-video-poster hidden>
+            {{ content.field_poster }}
+            <button type="button" class="paragraph__play" data-video-play>
+              <span class="visually-hidden">
+                {%- if not paragraph.field_title.isEmpty() -%}
+                  {{ 'Play the video: @title'|t({'@title': paragraph.field_title.value}) }}
+                {%- else -%}
+                  {{ 'Play the video'|t }}
+                {%- endif -%}
+              </span>
+            </button>
+          </div>
+        {% endif %}
+      </div>
+      {% if not paragraph.field_description.isEmpty() %}
+        <div class="paragraph__body text-content">{{ content.field_description }}</div>
+      {% endif %}
+      {{ content|without('field_title', 'field_video', 'field_poster', 'field_description', 'field_autoplay', 'field_controls', 'field_video_display_variant') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

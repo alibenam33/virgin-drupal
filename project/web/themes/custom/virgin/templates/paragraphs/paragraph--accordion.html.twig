@@ -1,0 +1,46 @@
+{#
+/**
+ * @file
+ * Paragraph "Accordéon" (accordion).
+ *
+ * Display booleans (consumed by js/accordion.js through data-* attributes):
+ * - field_first_item_open -> paragraph--accordion--first-item-open
+ *   + data-first-item-open
+ * - field_multiple_open -> paragraph--accordion--multiple-open (otherwise
+ *   paragraph--accordion--single-open) + data-multiple-open
+ */
+#}
+{{ attach_library('virgin/paragraphs.accordion') }}
+{% set first_item_open = paragraph.field_first_item_open.value ? true : false %}
+{% set multiple_open = paragraph.field_multiple_open.value ? true : false %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--accordion',
+    multiple_open ? 'paragraph--accordion--multiple-open' : 'paragraph--accordion--single-open',
+    first_item_open ? 'paragraph--accordion--first-item-open',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes).setAttribute('data-accordion', '').setAttribute('data-first-item-open', first_item_open ? 'true' : 'false').setAttribute('data-multiple-open', multiple_open ? 'true' : 'false') }}>
+    {% block content %}
+      {% if not paragraph.field_title.isEmpty() or not paragraph.field_intro.isEmpty() %}
+        <div class="paragraph__header">
+          {% if not paragraph.field_title.isEmpty() %}
+            <h2 class="paragraph__title">{{ content.field_title }}</h2>
+          {% endif %}
+          {% if not paragraph.field_intro.isEmpty() %}
+            <div class="paragraph__intro text-content">{{ content.field_intro }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if not paragraph.field_items.isEmpty() %}
+        <div class="paragraph__items">{{ content.field_items }}</div>
+      {% endif %}
+      {{ content|without('field_title', 'field_intro', 'field_items', 'field_first_item_open', 'field_multiple_open') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

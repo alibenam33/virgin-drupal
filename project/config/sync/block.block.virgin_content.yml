@@ -1,0 +1,22 @@
+uuid: da00e9ab-2c51-4790-b3c9-5dd17aa78ab0
+langcode: fr
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - virgin
+_core:
+  default_config_hash: erQSEZF2XUjNmgTl0uNRBzmg18ZGXwUcw2FhApoeuHk
+id: virgin_content
+theme: virgin
+region: content
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Contenu de la page principale'
+  label_display: '0'
+  provider: system
+visibility: {  }

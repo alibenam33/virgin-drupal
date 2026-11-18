@@ -1,0 +1,9 @@
+uuid: 8d0f570f-4e30-4a7c-871e-567f625933ae
+langcode: fr
+status: true
+dependencies: {  }
+name: 'Catégories de contenus'
+vid: content_categories
+description: 'Classification éditoriale'
+weight: 0
+new_revision: false

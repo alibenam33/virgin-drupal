@@ -1,0 +1,54 @@
+/**
+ * @file
+ * Paragraph "cards_grid".
+ * Variants: default | horizontal | vertical | image-top.
+ * Modifiers: paragraph--columns-{2,3,4} (grid in paragraph.css),
+ * paragraph--has-more-link.
+ */
+
+.paragraph--cards-grid > .paragraph__header {
+  max-width: 52rem;
+}
+
+/* Variant: horizontal -> cards laid out horizontally (one per row on
+   smaller screens, two columns max). */
+@media (min-width: 500px) {
+  .paragraph--cards-grid--horizontal .paragraph--card.paragraph--has-image {
+    flex-direction: row;
+  }
+
+  .paragraph--cards-grid--horizontal .paragraph--card .paragraph__media {
+    flex: 0 0 40%;
+  }
+
+  .paragraph--cards-grid--horizontal .paragraph--card .paragraph__media img {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+}
+
+@media (min-width: 1000px) {
+  .paragraph--cards-grid--horizontal.paragraph--columns-3 > .paragraph__grid,
+  .paragraph--cards-grid--horizontal.paragraph--columns-4 > .paragraph__grid {
+    --paragraph-columns: 2;
+  }
+}
+
+/* Variant: vertical -> centered stacked cards. */
+.paragraph--cards-grid--vertical .paragraph--card {
+  text-align: center;
+}
+
+/* Variant: image top -> image always first, full width. */
+.paragraph--cards-grid--image-top .paragraph--card {
+  flex-direction: column;
+}
+
+.paragraph--cards-grid--image-top .paragraph--card .paragraph__media {
+  order: -1;
+}
+
+.paragraph--cards-grid .paragraph__more {
+  justify-content: center;
+  margin-block-start: var(--sp2);
+}

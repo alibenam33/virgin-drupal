@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Paragraph "Élément d'accordéon" (accordion_item).
+ *
+ * Accessible disclosure pattern: an h3 containing a <button> with
+ * aria-expanded / aria-controls, and a labelled panel. Panels are open in
+ * the markup (content available without JavaScript); js/accordion.js applies
+ * the initial state defined by the parent accordion.
+ */
+#}
+{{ attach_library('virgin/paragraphs.accordion') }}
+{% set item_id = ('accordion-item-' ~ paragraph.id())|clean_unique_id %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--accordion-item',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes).setAttribute('data-accordion-item', '') }}>
+    {% block content %}
+      <h3 class="paragraph__heading">
+        <button type="button" class="paragraph__trigger" id="{{ item_id }}-trigger" aria-expanded="true" aria-controls="{{ item_id }}-panel" data-accordion-trigger>
+          <span class="paragraph__trigger-label">{{ content.field_title }}</span>
+          <span class="paragraph__trigger-icon" aria-hidden="true"></span>
+        </button>
+      </h3>
+      <div class="paragraph__panel" id="{{ item_id }}-panel" role="region" aria-labelledby="{{ item_id }}-trigger" data-accordion-panel>
+        <div class="paragraph__body text-content">{{ content.field_body }}</div>
+      </div>
+      {{ content|without('field_title', 'field_body') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Presentation-only hooks for the Virgin theme.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for field templates.
+ *
+ * Adds a "field__paragraph" / "field__media" suggestion so that paragraph
+ * and media fields are rendered without wrapper markup or (visually hidden)
+ * labels: each paragraph--*.html.twig template owns the semantic structure
+ * (headings, figure, blockquote...), and media labels such as "Image" are
+ * otherwise announced by screen readers before each image.
+ *
+ * The suggestion is inserted right after the field type suggestion so that
+ * more specific suggestions (field name, bundle) can still override it.
+ */
+function virgin_theme_suggestions_field_alter(array &$suggestions, array $variables): void {
+  $entity_type = $variables['element']['#entity_type'] ?? NULL;
+  if (in_array($entity_type, ['paragraph', 'media'], TRUE)) {
+    array_splice($suggestions, 1, 0, ['field__' . $entity_type]);
+  }
+}

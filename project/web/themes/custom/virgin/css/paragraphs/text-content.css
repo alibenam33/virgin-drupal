@@ -1,0 +1,9 @@
+/**
+ * @file
+ * Paragraph "text_content".
+ * Modifiers: paragraph--align-*, paragraph--width-* (see paragraph.css).
+ */
+
+.paragraph--text-content > .paragraph__inner {
+  max-width: 52rem;
+}

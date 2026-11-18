@@ -1,0 +1,9 @@
+uuid: 3b2821ab-9a8c-4790-9bbb-ad1f45d56727
+langcode: fr
+status: true
+dependencies: {  }
+name: Services
+vid: services
+description: 'Classification des services'
+weight: 0
+new_revision: false

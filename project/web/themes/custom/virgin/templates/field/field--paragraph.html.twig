@@ -1,0 +1,14 @@
+{#
+/**
+ * @file
+ * Field template for every paragraph field (see virgin.theme).
+ *
+ * Outputs the field items only, without wrapper or label: the parent
+ * paragraph template provides the semantic wrapper (h2, figure, etc.).
+ * Multiple values are output one after another; the paragraph template
+ * provides the list/grid container.
+ */
+#}
+{% for item in items %}
+  {{- item.content -}}
+{% endfor %}

@@ -1,0 +1,22 @@
+uuid: de09c7fb-87a6-48e3-8b02-cf35d049f108
+langcode: fr
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - virgin
+_core:
+  default_config_hash: VhBzWb7lMRtIOg9G7VSw_0uopi-7zXeHq4vXqqV1HFE
+id: virgin_breadcrumbs
+theme: virgin
+region: breadcrumb
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: "Fils d'ariane"
+  label_display: '0'
+  provider: system
+visibility: {  }

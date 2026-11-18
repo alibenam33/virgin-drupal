@@ -1,0 +1,26 @@
+/**
+ * @file
+ * Global styles of the Virgin theme (on top of Olivero).
+ */
+
+/* File links (see templates/field/file-link.html.twig). */
+.file__meta {
+  display: inline-flex;
+  gap: var(--sp0-5);
+  margin-inline-start: var(--sp0-5);
+  color: var(--color-text-neutral-soft);
+  font-size: var(--font-size-s);
+}
+
+.file__size::before {
+  content: "(";
+}
+
+.file__size::after {
+  content: ")";
+}
+
+/* The file type is only displayed where a component asks for it. */
+.file__type {
+  display: none;
+}

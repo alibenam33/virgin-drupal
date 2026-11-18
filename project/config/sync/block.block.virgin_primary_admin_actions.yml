@@ -1,0 +1,20 @@
+uuid: fe187f39-3235-4fdf-a522-2a091f923b54
+langcode: fr
+status: true
+dependencies:
+  theme:
+    - virgin
+_core:
+  default_config_hash: Q9_2whdOj1YIomfvsIfopROW4FT_X5pY0DjdOiOaQ5U
+id: virgin_primary_admin_actions
+theme: virgin
+region: highlighted
+weight: -5
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: "Actions d'administration principales"
+  label_display: '0'
+  provider: core
+visibility: {  }

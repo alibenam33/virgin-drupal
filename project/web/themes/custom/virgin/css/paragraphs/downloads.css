@@ -1,0 +1,89 @@
+/**
+ * @file
+ * Paragraphs "downloads" and "download_item".
+ * Modifiers: paragraph--downloads--show-file-size,
+ * paragraph--downloads--show-file-type (toggle file-link meta).
+ */
+
+.paragraph--downloads > .paragraph__items {
+  display: grid;
+  gap: var(--sp0-75);
+}
+
+/* File meta visibility driven by the parent options. */
+.paragraph--downloads .file__size,
+.paragraph--downloads .file__type {
+  display: none;
+}
+
+.paragraph--downloads--show-file-size .file__size,
+.paragraph--downloads--show-file-type .file__type {
+  display: inline;
+}
+
+.paragraph--downloads--show-file-type .file__type {
+  padding: 0 var(--sp0-25);
+  border: 1px solid currentcolor;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-xxs);
+  font-weight: 700;
+}
+
+/* Download item: whole row clickable through the file link. */
+.paragraph--download-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp1);
+  padding: var(--sp1) var(--sp1-5);
+  border: 1px solid var(--paragraph-border);
+  border-radius: var(--paragraph-radius);
+  background-color: var(--color--white);
+}
+
+.paragraph--download-item:hover {
+  border-color: var(--color--primary-50);
+}
+
+.paragraph--download-item:focus-within {
+  outline: 3px solid var(--color--primary-60);
+  outline-offset: 2px;
+}
+
+.paragraph--download-item .paragraph__title {
+  margin-block-end: var(--sp0-25);
+  font-size: 1.125rem;
+}
+
+.paragraph--download-item .paragraph__content {
+  flex: 1 1 20rem;
+}
+
+.paragraph--download-item .paragraph__body {
+  font-size: var(--font-size-s);
+}
+
+.paragraph--download-item .paragraph__file {
+  margin-block-start: var(--sp0-25);
+  font-size: var(--font-size-s);
+}
+
+.paragraph--download-item .paragraph__file a::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+}
+
+.paragraph--download-item .paragraph__file a:focus {
+  outline: none;
+}
+
+.paragraph--download-item .paragraph__action {
+  padding: var(--sp0-5) var(--sp1);
+  color: var(--color--white);
+  border-radius: var(--paragraph-radius);
+  background-color: var(--color--primary-40);
+  font-size: var(--font-size-s);
+  font-weight: 600;
+}

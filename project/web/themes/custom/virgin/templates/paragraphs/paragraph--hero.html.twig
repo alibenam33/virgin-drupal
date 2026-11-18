@@ -1,0 +1,67 @@
+{#
+/**
+ * @file
+ * Paragraph "Hero / Bannière principale" (hero).
+ *
+ * List fields driving the display:
+ * - field_display_variant: default (default) | full_width | split | framed
+ *   -> paragraph--hero--{value}
+ * - field_content_alignment: left (default) | center | right
+ *   -> paragraph--align-{value}
+ *
+ * The background image is decorative (aria-hidden), the main image is
+ * rendered in a dedicated media column (used by the "split" variant).
+ * The title is an h2: the page title (h1) is rendered by Olivero.
+ */
+#}
+{{ attach_library('virgin/paragraphs') }}
+{% set variant = paragraph.field_display_variant.value|default('default') %}
+{% set alignment = paragraph.field_content_alignment.value|default('left') %}
+{% set has_background = not paragraph.field_background_image.isEmpty() %}
+{% set has_image = not paragraph.field_image.isEmpty() %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--hero',
+    'paragraph--hero--' ~ variant|clean_class,
+    'paragraph--align-' ~ alignment|clean_class,
+    has_background ? 'paragraph--has-background',
+    has_image ? 'paragraph--has-image',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {% if has_background %}
+        <div class="paragraph__background" aria-hidden="true">{{ content.field_background_image }}</div>
+      {% endif %}
+      <div class="paragraph__inner">
+        <div class="paragraph__content">
+          <h2 class="paragraph__title">{{ content.field_title }}</h2>
+          {% if not paragraph.field_subtitle.isEmpty() %}
+            <p class="paragraph__subtitle">{{ content.field_subtitle }}</p>
+          {% endif %}
+          {% if not paragraph.field_description.isEmpty() %}
+            <div class="paragraph__body text-content">{{ content.field_description }}</div>
+          {% endif %}
+          {% if not paragraph.field_cta_link.isEmpty() %}
+            <div class="paragraph__actions">
+              {% if not paragraph.field_cta_label.isEmpty() %}
+                {{ link(paragraph.field_cta_label.value, paragraph.field_cta_link.0.url, {'class': ['button', 'button--primary', 'paragraph__button']}) }}
+              {% else %}
+                {{ content.field_cta_link }}
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+        {% if has_image %}
+          <div class="paragraph__media">{{ content.field_image }}</div>
+        {% endif %}
+      </div>
+      {{ content|without('field_title', 'field_subtitle', 'field_description', 'field_background_image', 'field_image', 'field_cta_label', 'field_cta_link', 'field_display_variant', 'field_content_alignment') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

@@ -1,0 +1,22 @@
+uuid: e39d407d-d128-4f64-a074-b5e4829da42d
+langcode: fr
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - virgin
+_core:
+  default_config_hash: VfPFqqxfkomud5CO8DUijw85QIl9GIxh_nIxLOYESxg
+id: virgin_help
+theme: virgin
+region: content_above
+weight: 0
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Aide
+  label_display: '0'
+  provider: help
+visibility: {  }

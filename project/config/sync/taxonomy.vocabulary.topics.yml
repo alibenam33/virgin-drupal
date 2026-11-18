@@ -1,0 +1,9 @@
+uuid: 04399ded-c7e4-4c83-878d-0e10de4935f5
+langcode: fr
+status: true
+dependencies: {  }
+name: Thématiques
+vid: topics
+description: 'Classement transversal'
+weight: 0
+new_revision: false

@@ -1,0 +1,65 @@
+{#
+/**
+ * @file
+ * Paragraph "Témoignage client" (testimonial).
+ *
+ * No list field. Display modifiers:
+ * - field_rating (integer 1-5) -> paragraph--rating-{n}, rendered as an
+ *   accessible star rating (role="img" + aria-label).
+ * - paragraph--has-image / paragraph--has-logo depending on the media.
+ */
+#}
+{{ attach_library('virgin/paragraphs') }}
+{% set has_rating = not paragraph.field_rating.isEmpty() %}
+{% set rating = has_rating ? max(0, min(paragraph.field_rating.value, 5)) : 0 %}
+{% set has_image = not paragraph.field_image.isEmpty() %}
+{% set has_logo = not paragraph.field_company_logo.isEmpty() %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--testimonial',
+    has_rating ? 'paragraph--rating-' ~ rating,
+    has_image ? 'paragraph--has-image',
+    has_logo ? 'paragraph--has-logo',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {% if not paragraph.field_title.isEmpty() %}
+        <h2 class="paragraph__title">{{ content.field_title }}</h2>
+      {% endif %}
+      <figure class="paragraph__figure">
+        {% if has_rating %}
+          <p class="paragraph__rating" role="img" aria-label="{{ 'Rating: @rating out of 5'|t({'@rating': rating}) }}">
+            {%- for i in 1..5 -%}
+              <span class="paragraph__star{{ i <= rating ? ' paragraph__star--filled' }}" aria-hidden="true">&#9733;</span>
+            {%- endfor -%}
+          </p>
+        {% endif %}
+        <blockquote class="paragraph__quote text-content">{{ content.field_testimonial }}</blockquote>
+        <figcaption class="paragraph__caption">
+          {% if has_image %}
+            <div class="paragraph__avatar">{{ content.field_image }}</div>
+          {% endif %}
+          <div class="paragraph__attribution">
+            <span class="paragraph__author">{{ content.field_author }}</span>
+            {% if not paragraph.field_author_role.isEmpty() %}
+              <span class="paragraph__role">{{ content.field_author_role }}</span>
+            {% endif %}
+            {% if not paragraph.field_company.isEmpty() %}
+              <span class="paragraph__organization">{{ content.field_company }}</span>
+            {% endif %}
+          </div>
+          {% if has_logo %}
+            <div class="paragraph__logo">{{ content.field_company_logo }}</div>
+          {% endif %}
+        </figcaption>
+      </figure>
+      {{ content|without('field_title', 'field_testimonial', 'field_rating', 'field_image', 'field_author', 'field_author_role', 'field_company', 'field_company_logo') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

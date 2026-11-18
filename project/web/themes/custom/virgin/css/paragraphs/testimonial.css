@@ -1,0 +1,55 @@
+/**
+ * @file
+ * Paragraph "testimonial".
+ * Modifiers: paragraph--rating-{1..5}, paragraph--has-image, --has-logo.
+ * Shared author styles are in quote.css.
+ */
+
+.paragraph--testimonial .paragraph__figure {
+  max-width: 52rem;
+  margin: 0;
+  padding: var(--sp1-5);
+  border-radius: var(--paragraph-radius);
+  background-color: var(--paragraph-surface);
+}
+
+.paragraph--testimonial .paragraph__quote {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.paragraph--testimonial .paragraph__rating {
+  display: flex;
+  gap: 0.125rem;
+  margin-block: 0 var(--sp0-75);
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.paragraph--testimonial .paragraph__star {
+  color: var(--color--gray-70);
+}
+
+.paragraph--testimonial .paragraph__star--filled {
+  color: var(--color--gold);
+}
+
+@media (forced-colors: active) {
+  .paragraph--testimonial .paragraph__star {
+    color: GrayText;
+  }
+
+  .paragraph--testimonial .paragraph__star--filled {
+    color: CanvasText;
+  }
+}
+
+.paragraph--testimonial .paragraph__logo {
+  margin-inline-start: auto;
+}
+
+.paragraph--testimonial .paragraph__logo img {
+  max-width: 7rem;
+  max-height: 3rem;
+  object-fit: contain;
+}

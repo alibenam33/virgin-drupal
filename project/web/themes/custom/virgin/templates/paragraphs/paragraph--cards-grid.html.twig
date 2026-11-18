@@ -1,0 +1,54 @@
+{#
+/**
+ * @file
+ * Paragraph "Grille de cartes" (cards_grid).
+ *
+ * List / display fields:
+ * - field_cards_grid_display_variant: default (default) | horizontal
+ *   | vertical | image_top -> paragraph--cards-grid--{value}
+ * - field_columns (integer 2-4, default 3) -> paragraph--columns-{n}
+ * - field_show_more_link (boolean) -> paragraph--has-more-link
+ *   + data-show-more-link; the "more" link is only displayed when enabled.
+ */
+#}
+{{ attach_library('virgin/paragraphs') }}
+{% set variant = paragraph.field_cards_grid_display_variant.value|default('default') %}
+{% set columns = max(2, min(paragraph.field_columns.value|default(3), 4)) %}
+{% set show_more_link = paragraph.field_show_more_link.value and not paragraph.field_more_link.isEmpty() %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--cards-grid',
+    'paragraph--cards-grid--' ~ variant|clean_class,
+    'paragraph--columns-' ~ columns,
+    show_more_link ? 'paragraph--has-more-link',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes).setAttribute('data-columns', columns).setAttribute('data-show-more-link', show_more_link ? 'true' : 'false') }}>
+    {% block content %}
+      <div class="paragraph__header">
+        <h2 class="paragraph__title">{{ content.field_title }}</h2>
+        {% if not paragraph.field_intro.isEmpty() %}
+          <div class="paragraph__intro text-content">{{ content.field_intro }}</div>
+        {% endif %}
+      </div>
+      {% if not paragraph.field_cards.isEmpty() %}
+        <div class="paragraph__items paragraph__grid">{{ content.field_cards }}</div>
+      {% endif %}
+      {% if show_more_link %}
+        <div class="paragraph__actions paragraph__more">
+          {% if not paragraph.field_more_link_label.isEmpty() %}
+            {{ link(paragraph.field_more_link_label.value, paragraph.field_more_link.0.url, {'class': ['button', 'paragraph__button']}) }}
+          {% else %}
+            {{ content.field_more_link }}
+          {% endif %}
+        </div>
+      {% endif %}
+      {{ content|without('field_title', 'field_intro', 'field_cards', 'field_columns', 'field_cards_grid_display_variant', 'field_show_more_link', 'field_more_link_label', 'field_more_link') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

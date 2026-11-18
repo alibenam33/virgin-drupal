@@ -1,0 +1,55 @@
+{#
+/**
+ * @file
+ * Paragraph "Image / Visuel" (image).
+ *
+ * List fields driving the display:
+ * - field_image_display_variant: full_width | contained (default) | rounded
+ *   | framed -> paragraph--image--{value}
+ *
+ * The alternative text comes from the media entity. When a link is set, the
+ * image is wrapped in it (the image alt then names the link).
+ */
+#}
+{{ attach_library('virgin/paragraphs') }}
+{% set variant = paragraph.field_image_display_variant.value|default('contained') %}
+{% set has_caption = not paragraph.field_caption.isEmpty() or not paragraph.field_image_credit.isEmpty() %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--image',
+    'paragraph--image--' ~ variant|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {% if not paragraph.field_title.isEmpty() %}
+        <h2 class="paragraph__title">{{ content.field_title }}</h2>
+      {% endif %}
+      <figure class="paragraph__figure">
+        <div class="paragraph__media">
+          {% if not paragraph.field_link.isEmpty() %}
+            {{ link(content.field_image, paragraph.field_link.0.url, {'class': ['paragraph__media-link']}) }}
+          {% else %}
+            {{ content.field_image }}
+          {% endif %}
+        </div>
+        {% if has_caption %}
+          <figcaption class="paragraph__caption">
+            {% if not paragraph.field_caption.isEmpty() %}
+              <span class="paragraph__caption-text">{{ content.field_caption }}</span>
+            {% endif %}
+            {% if not paragraph.field_image_credit.isEmpty() %}
+              <small class="paragraph__credit">{{ content.field_image_credit }}</small>
+            {% endif %}
+          </figcaption>
+        {% endif %}
+      </figure>
+      {{ content|without('field_title', 'field_image', 'field_link', 'field_caption', 'field_image_credit', 'field_image_display_variant') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

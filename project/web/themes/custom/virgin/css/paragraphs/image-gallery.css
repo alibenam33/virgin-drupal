@@ -1,0 +1,187 @@
+/**
+ * @file
+ * Paragraph "image_gallery" + lightbox dialog.
+ * Display modes: grid | masonry | carousel.
+ * Modifiers: paragraph--columns-{2,3,4}, paragraph--has-lightbox.
+ */
+
+.paragraph--image-gallery {
+  --gallery-columns: 1;
+}
+
+@media (min-width: 500px) {
+  .paragraph--image-gallery {
+    --gallery-columns: 2;
+  }
+}
+
+@media (min-width: 1000px) {
+  .paragraph--image-gallery.paragraph--columns-3 {
+    --gallery-columns: 3;
+  }
+
+  .paragraph--image-gallery.paragraph--columns-4 {
+    --gallery-columns: 4;
+  }
+}
+
+.paragraph--image-gallery .paragraph__gallery img {
+  width: 100%;
+  border-radius: var(--paragraph-radius);
+}
+
+/* Mode: grid (uniform tiles). */
+.paragraph--image-gallery--grid .paragraph__gallery {
+  display: grid;
+  grid-template-columns: repeat(var(--gallery-columns), minmax(0, 1fr));
+  gap: var(--sp1);
+}
+
+.paragraph--image-gallery--grid .paragraph__gallery img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* Mode: masonry (CSS columns, natural ratios). */
+.paragraph--image-gallery--masonry .paragraph__gallery {
+  column-count: var(--gallery-columns);
+  column-gap: var(--sp1);
+}
+
+.paragraph--image-gallery--masonry .paragraph__gallery > * {
+  margin-block-end: var(--sp1);
+  break-inside: avoid;
+}
+
+/* Mode: carousel (horizontal scroll-snap, keyboard scrollable region). */
+.paragraph--image-gallery--carousel .paragraph__gallery {
+  display: grid;
+  grid-auto-columns: calc((100% - (var(--gallery-columns) - 1) * var(--sp1)) / var(--gallery-columns));
+  grid-auto-flow: column;
+  gap: var(--sp1);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  padding-block-end: var(--sp0-5);
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+.paragraph--image-gallery--carousel .paragraph__gallery > * {
+  scroll-snap-align: start;
+}
+
+.paragraph--image-gallery--carousel .paragraph__gallery img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.paragraph--image-gallery .paragraph__gallery:focus-visible {
+  outline: 3px solid var(--color--primary-60);
+  outline-offset: 3px;
+}
+
+@media (max-width: 499px) {
+  .paragraph--image-gallery--carousel .paragraph__gallery {
+    grid-auto-columns: 85%;
+  }
+}
+
+/* Lightbox trigger (added by js/lightbox.js). */
+.paragraph__zoom {
+  display: block;
+  width: 100%;
+  padding: 0;
+  cursor: zoom-in;
+  border: 0;
+  background: none;
+}
+
+.paragraph__zoom:focus-visible {
+  outline: 3px solid var(--color--primary-60);
+  outline-offset: 3px;
+}
+
+/* Lightbox dialog. */
+.virgin-lightbox {
+  width: min(96vw, 80rem);
+  max-height: 96vh;
+  padding: var(--sp2) var(--sp3);
+  color: var(--color--white);
+  border: 0;
+  background: transparent;
+}
+
+.virgin-lightbox::backdrop {
+  background-color: rgb(0 0 0 / 0.85);
+}
+
+.virgin-lightbox__figure {
+  margin: 0;
+  text-align: center;
+}
+
+.virgin-lightbox__image {
+  max-width: 100%;
+  max-height: 80vh;
+  margin-inline: auto;
+}
+
+.virgin-lightbox__caption,
+.virgin-lightbox__counter {
+  margin-block: var(--sp0-5) 0;
+  font-size: var(--font-size-s);
+  text-align: center;
+}
+
+.virgin-lightbox button {
+  position: absolute;
+  width: 2.75rem;
+  height: 2.75rem;
+  cursor: pointer;
+  color: var(--color--white);
+  border: 2px solid var(--color--white);
+  border-radius: 50%;
+  background: rgb(0 0 0 / 0.5);
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.virgin-lightbox button[hidden] {
+  display: none;
+}
+
+.virgin-lightbox button:focus-visible {
+  outline: 3px solid var(--color--primary-60);
+  outline-offset: 2px;
+}
+
+.virgin-lightbox__close {
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+
+.virgin-lightbox__close::before {
+  content: "\00d7";
+}
+
+.virgin-lightbox__prev,
+.virgin-lightbox__next {
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+}
+
+.virgin-lightbox__prev {
+  inset-inline-start: 0;
+}
+
+.virgin-lightbox__prev::before {
+  content: "\2039";
+}
+
+.virgin-lightbox__next {
+  inset-inline-end: 0;
+}
+
+.virgin-lightbox__next::before {
+  content: "\203a";
+}

@@ -1,0 +1,99 @@
+/**
+ * @file
+ * Paragraphs "tabs" and "tab_item".
+ * Variants (orientation): horizontal | vertical.
+ * The tablist is built by js/tabs.js (.is-enhanced).
+ */
+
+.paragraph--tabs .paragraph__tablist {
+  display: flex;
+  gap: var(--sp0-25);
+  overflow-x: auto;
+  border-block-end: 1px solid var(--paragraph-border);
+}
+
+.paragraph--tabs .paragraph__tablist[hidden] {
+  display: none;
+}
+
+.paragraph--tabs .paragraph__tab {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--sp0-5);
+  margin-block-end: -1px;
+  padding: var(--sp0-75) var(--sp1);
+  cursor: pointer;
+  color: var(--color-text-neutral-medium);
+  border: 0;
+  border-block-end: 3px solid transparent;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+}
+
+.paragraph--tabs .paragraph__tab:hover {
+  color: var(--color-text-primary-medium);
+}
+
+.paragraph--tabs .paragraph__tab[aria-selected="true"] {
+  color: var(--color-text-primary-loud);
+  border-block-end-color: var(--color--primary-50);
+}
+
+.paragraph--tabs .paragraph__tab:focus-visible,
+.paragraph--tab-item[role="tabpanel"]:focus-visible {
+  outline: 3px solid var(--color--primary-60);
+  outline-offset: 2px;
+}
+
+.paragraph--tabs .paragraph__tab-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.paragraph--tabs .paragraph__panels > .paragraph--tab-item {
+  padding-block: var(--sp1);
+}
+
+.paragraph--tab-item[hidden] {
+  display: none;
+}
+
+/* Without JS: stacked sections. */
+.paragraph--tabs:not(.is-enhanced) .paragraph--tab-item + .paragraph--tab-item {
+  border-block-start: 1px solid var(--paragraph-border);
+}
+
+.paragraph--tab-item .paragraph__tab-title {
+  margin-block: 0 var(--sp0-5);
+  font-size: 1.25rem;
+}
+
+/* Vertical orientation (from 700px; horizontal below). */
+@media (min-width: 700px) {
+  .paragraph--tabs--vertical.is-enhanced .paragraph__tabs-wrapper {
+    display: grid;
+    grid-template-columns: minmax(10rem, 16rem) minmax(0, 1fr);
+    gap: var(--sp2);
+  }
+
+  .paragraph--tabs--vertical .paragraph__tablist {
+    flex-direction: column;
+    overflow-x: visible;
+    border-block-end: 0;
+    border-inline-end: 1px solid var(--paragraph-border);
+  }
+
+  .paragraph--tabs--vertical .paragraph__tab {
+    margin-block-end: 0;
+    margin-inline-end: -1px;
+    text-align: start;
+    border-block-end: 0;
+    border-inline-end: 3px solid transparent;
+  }
+
+  .paragraph--tabs--vertical .paragraph__tab[aria-selected="true"] {
+    border-inline-end-color: var(--color--primary-50);
+  }
+}

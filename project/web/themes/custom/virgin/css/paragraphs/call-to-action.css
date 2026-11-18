@@ -1,0 +1,91 @@
+/**
+ * @file
+ * Paragraph "call_to_action".
+ * Variants: primary | secondary | highlight | image-background.
+ * Modifiers: paragraph--align-*, paragraph--has-image, --has-background.
+ */
+
+.paragraph--call-to-action {
+  overflow: hidden;
+  padding: var(--sp2);
+  border-radius: var(--paragraph-radius);
+}
+
+.paragraph--call-to-action > .paragraph__inner {
+  display: grid;
+  gap: var(--sp2);
+  align-items: center;
+}
+
+@media (min-width: 700px) {
+  .paragraph--call-to-action {
+    padding: var(--sp3);
+  }
+
+  .paragraph--call-to-action.paragraph--has-image > .paragraph__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  }
+
+  .paragraph--call-to-action.paragraph--has-image.paragraph--align-right .paragraph__media {
+    order: 1;
+  }
+}
+
+.paragraph--call-to-action .paragraph__media img {
+  border-radius: var(--paragraph-radius);
+}
+
+/* Variant: primary. */
+.paragraph--call-to-action--primary {
+  color: var(--color--white);
+  background-color: var(--color--primary-40);
+}
+
+.paragraph--call-to-action--primary .paragraph__title,
+.paragraph--call-to-action--primary .paragraph__body,
+.paragraph--call-to-action--primary .paragraph__eyebrow {
+  color: var(--color--white);
+}
+
+.paragraph--call-to-action--primary .button--primary {
+  color: var(--color--primary-30);
+  border-color: var(--color--white);
+  background-color: var(--color--white);
+}
+
+/* Variant: secondary. */
+.paragraph--call-to-action--secondary {
+  border: 1px solid var(--paragraph-border);
+  background-color: var(--paragraph-surface);
+}
+
+/* Variant: highlight. */
+.paragraph--call-to-action--highlight {
+  border-inline-start: 6px solid var(--color--gold);
+  background-color: var(--color--primary-80);
+}
+
+/* Variant: image background. */
+.paragraph--call-to-action--image-background {
+  color: var(--color--white);
+  background-color: var(--color--gray-10);
+}
+
+.paragraph--call-to-action--image-background .paragraph__background::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background-color: rgb(0 0 0 / 0.55);
+}
+
+.paragraph--call-to-action--image-background .paragraph__title,
+.paragraph--call-to-action--image-background .paragraph__body,
+.paragraph--call-to-action--image-background .paragraph__eyebrow {
+  color: var(--color--white);
+}
+
+@media (min-width: 700px) {
+  .paragraph--call-to-action--image-background {
+    padding-block: var(--sp5);
+  }
+}

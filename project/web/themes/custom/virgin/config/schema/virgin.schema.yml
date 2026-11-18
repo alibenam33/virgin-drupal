@@ -1,0 +1,7 @@
+# Schema for the configuration files of the Virgin theme.
+# Mirrors olivero.settings: Olivero hooks read these settings for the active
+# theme.
+
+virgin.settings:
+  type: olivero.settings
+  label: 'Virgin settings'

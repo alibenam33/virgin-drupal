@@ -1,0 +1,22 @@
+uuid: f880ab49-95c2-401e-ab21-613f16718491
+langcode: fr
+status: true
+dependencies:
+  theme:
+    - virgin
+_core:
+  default_config_hash: nGE3EoPQQaQCuqTUtZgw0-KIzmrqdKDzdNQf2JyPUt4
+id: virgin_primary_local_tasks
+theme: virgin
+region: highlighted
+weight: -4
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Onglets principaux'
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: false
+visibility: {  }

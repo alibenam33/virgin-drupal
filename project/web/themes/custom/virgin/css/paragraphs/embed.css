@@ -1,0 +1,65 @@
+/**
+ * @file
+ * Paragraph "embed".
+ * Variants (provider): youtube | vimeo | google-maps | external-form | other.
+ * Modifiers: paragraph--has-fixed-height (field_height),
+ * paragraph--embed--fallback.
+ */
+
+.paragraph--embed .paragraph__body {
+  margin-block-end: var(--sp1);
+}
+
+.paragraph--embed .paragraph__embed {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--paragraph-radius);
+  background-color: var(--paragraph-surface);
+}
+
+.paragraph--embed .paragraph__frame {
+  display: block;
+  width: 100%;
+  height: 28rem;
+  border: 0;
+}
+
+/* Video providers: 16:9 ratio by default. */
+.paragraph--embed--youtube:not(.paragraph--has-fixed-height) .paragraph__frame,
+.paragraph--embed--vimeo:not(.paragraph--has-fixed-height) .paragraph__frame {
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+/* Maps: shorter on mobile. */
+.paragraph--embed--google-maps:not(.paragraph--has-fixed-height) .paragraph__frame {
+  height: 20rem;
+}
+
+@media (min-width: 700px) {
+  .paragraph--embed--google-maps:not(.paragraph--has-fixed-height) .paragraph__frame {
+    height: 28rem;
+  }
+}
+
+/* External forms: taller default. */
+.paragraph--embed--external-form:not(.paragraph--has-fixed-height) .paragraph__frame {
+  height: 40rem;
+}
+
+/* Editor-defined height. */
+.paragraph--has-fixed-height .paragraph__frame {
+  height: var(--embed-height, 28rem);
+}
+
+.paragraph--embed .paragraph__fallback {
+  margin-block: var(--sp0-5) 0;
+  font-size: var(--font-size-s);
+}
+
+.paragraph--embed--fallback .paragraph__fallback {
+  padding: var(--sp1);
+  border: 1px dashed var(--paragraph-border);
+  border-radius: var(--paragraph-radius);
+  font-size: inherit;
+}

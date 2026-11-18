@@ -1,0 +1,9 @@
+uuid: 71cda2b2-7a53-47e9-91a6-0189d6c1ea06
+langcode: fr
+status: true
+dependencies: {  }
+name: 'Publics cibles'
+vid: target_audiences
+description: Segmentation
+weight: 0
+new_revision: false

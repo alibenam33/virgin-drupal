@@ -1,0 +1,56 @@
+/**
+ * @file
+ * Paragraph "separator".
+ * Variants: spacing | line | decorative; modifier --with-line.
+ * Spacing modifiers paragraph--spacing-top-* / -bottom-* in paragraph.css.
+ */
+
+.paragraph--separator {
+  margin-block: var(--sp2);
+}
+
+.paragraph--separator .paragraph__line {
+  height: 0;
+  margin: 0;
+  border: 0;
+  border-block-start: 1px solid var(--color--gray-90);
+}
+
+.paragraph--separator--line .paragraph__line {
+  border-block-start-width: 2px;
+}
+
+.paragraph--separator .paragraph__ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp1);
+}
+
+.paragraph--separator .paragraph__ornament::before {
+  width: 0.5rem;
+  height: 0.5rem;
+  content: "";
+  transform: rotate(45deg);
+  background-color: var(--color--primary-50);
+  box-shadow: 1.25rem -1.25rem 0 var(--color--primary-60), -1.25rem 1.25rem 0 var(--color--primary-60);
+}
+
+/* Decorative + show line: lines on both sides of the ornament. */
+.paragraph--separator--decorative.paragraph--separator--with-line .paragraph__ornament::after {
+  position: absolute;
+  z-index: -1;
+  inset-inline: 0;
+  content: "";
+  border-block-start: 1px solid var(--color--gray-90);
+}
+
+.paragraph--separator--decorative.paragraph--separator--with-line .paragraph__ornament {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Pure spacing: no visual. */
+.paragraph--separator--spacing:not(.paragraph--separator--with-line) {
+  height: 0;
+}

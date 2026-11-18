@@ -1,0 +1,89 @@
+/**
+ * @file
+ * Paragraph "contact".
+ * Modifiers: paragraph--has-image.
+ */
+
+.paragraph--contact > .paragraph__inner {
+  display: grid;
+  gap: var(--sp1-5);
+  padding: var(--sp1-5);
+  border: 1px solid var(--paragraph-border);
+  border-radius: var(--paragraph-radius);
+}
+
+@media (min-width: 500px) {
+  .paragraph--contact.paragraph--has-image > .paragraph__inner {
+    grid-template-columns: 8rem minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.paragraph--contact .paragraph__media img {
+  border-radius: 50%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.paragraph--contact .paragraph__content {
+  font-style: normal;
+}
+
+.paragraph--contact .paragraph__content p {
+  margin-block: 0;
+}
+
+.paragraph--contact .paragraph__name {
+  color: var(--color-text-neutral-loud);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.paragraph--contact .paragraph__role,
+.paragraph--contact .paragraph__organization {
+  color: var(--color-text-neutral-soft);
+}
+
+.paragraph--contact .paragraph__address {
+  margin-block-start: var(--sp0-75);
+}
+
+.paragraph--contact .paragraph__channels {
+  display: grid;
+  gap: var(--sp0-25);
+  margin: var(--sp0-75) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.paragraph--contact .paragraph__channel-label {
+  display: inline-block;
+  min-width: 6rem;
+  color: var(--color-text-neutral-soft);
+  font-size: var(--font-size-s);
+  font-weight: 600;
+}
+
+.paragraph--contact .paragraph__channel a {
+  overflow-wrap: anywhere;
+}
+
+/* Contact link rendered as a button. */
+.paragraph--contact .paragraph__actions a {
+  display: inline-block;
+  padding: var(--sp0-5) var(--sp1-5);
+  text-decoration: none;
+  color: var(--color--white);
+  border-radius: var(--paragraph-radius);
+  background-color: var(--color--primary-40);
+}
+
+.paragraph--contact .paragraph__actions a:hover,
+.paragraph--contact .paragraph__actions a:focus-visible {
+  background-color: var(--color--primary-30);
+}
+
+.paragraph--contact .paragraph__actions a:focus-visible {
+  outline: 3px solid var(--color--primary-60);
+  outline-offset: 2px;
+}

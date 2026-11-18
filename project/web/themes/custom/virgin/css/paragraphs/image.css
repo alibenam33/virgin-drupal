@@ -1,0 +1,61 @@
+/**
+ * @file
+ * Paragraph "image".
+ * Variants: full-width | contained | rounded | framed.
+ */
+
+.paragraph--image .paragraph__figure {
+  margin: 0;
+}
+
+.paragraph--image .paragraph__media img {
+  width: 100%;
+}
+
+.paragraph--image .paragraph__media-link {
+  display: block;
+}
+
+.paragraph--image .paragraph__media-link:focus-visible {
+  outline: 3px solid var(--color--primary-60);
+  outline-offset: 3px;
+}
+
+.paragraph--image .paragraph__caption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--sp0-5);
+  margin-block-start: var(--sp0-5);
+  color: var(--color-text-neutral-soft);
+  font-size: var(--font-size-s);
+}
+
+.paragraph--image .paragraph__credit {
+  font-size: var(--font-size-xs);
+  font-style: italic;
+}
+
+/* Variant: contained (limited width, centered). */
+.paragraph--image--contained .paragraph__figure {
+  max-width: 52rem;
+  margin-inline: auto;
+}
+
+/* Variant: rounded. */
+.paragraph--image--rounded .paragraph__media img {
+  border-radius: var(--sp1);
+}
+
+/* Variant: framed. */
+.paragraph--image--framed .paragraph__figure {
+  padding: var(--sp0-75);
+  border: 1px solid var(--paragraph-border);
+  background-color: var(--color--white);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.08);
+}
+
+/* Variant: full width (uses the whole content column). */
+.paragraph--image--full-width .paragraph__caption {
+  padding-inline: var(--sp0-5);
+}

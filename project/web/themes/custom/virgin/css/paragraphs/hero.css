@@ -1,0 +1,124 @@
+/**
+ * @file
+ * Paragraph "hero".
+ * Variants: default | full-width | split | framed.
+ * Modifiers: paragraph--align-*, paragraph--has-background, --has-image.
+ */
+
+.paragraph--hero {
+  overflow: hidden;
+  padding: var(--sp2) var(--sp1);
+  border-radius: var(--paragraph-radius);
+  background-color: var(--paragraph-surface);
+}
+
+.paragraph--hero > .paragraph__inner {
+  display: grid;
+  gap: var(--sp2);
+  align-items: center;
+}
+
+.paragraph--hero .paragraph__title {
+  font-size: 2rem;
+}
+
+.paragraph--hero .paragraph__subtitle {
+  margin-block: 0 var(--sp1);
+  color: var(--color-text-neutral-medium);
+  font-size: 1.25rem;
+}
+
+@media (min-width: 700px) {
+  .paragraph--hero {
+    padding: var(--sp4) var(--sp3);
+  }
+
+  .paragraph--hero .paragraph__title {
+    font-size: 3rem;
+  }
+}
+
+/* Content alignment. */
+.paragraph--hero.paragraph--align-center .paragraph__content {
+  margin-inline: auto;
+}
+
+.paragraph--hero.paragraph--align-right .paragraph__content {
+  margin-inline-start: auto;
+}
+
+.paragraph--hero .paragraph__content {
+  max-width: 44rem;
+}
+
+/* Background image: dark overlay for contrast. */
+.paragraph--hero.paragraph--has-background {
+  min-height: 24rem;
+  display: flex;
+  align-items: center;
+  color: var(--color--white);
+  background-color: var(--color--gray-10);
+}
+
+.paragraph--hero.paragraph--has-background > .paragraph__inner {
+  width: 100%;
+}
+
+.paragraph--hero.paragraph--has-background .paragraph__background::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(90deg, rgb(0 0 0 / 0.7), rgb(0 0 0 / 0.35));
+}
+
+.paragraph--hero.paragraph--has-background .paragraph__title,
+.paragraph--hero.paragraph--has-background .paragraph__subtitle,
+.paragraph--hero.paragraph--has-background .paragraph__body {
+  color: var(--color--white);
+}
+
+/* Variant: full width (no frame, no radius, edge to edge of the column). */
+.paragraph--hero--full-width {
+  border-radius: 0;
+}
+
+@media (min-width: 700px) {
+  .paragraph--hero--full-width {
+    padding-block: var(--sp6);
+  }
+}
+
+/* Variant: split (content + image side by side). */
+@media (min-width: 1000px) {
+  .paragraph--hero--split.paragraph--has-image > .paragraph__inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .paragraph--hero--split.paragraph--align-right .paragraph__media {
+    order: -1;
+  }
+}
+
+.paragraph--hero--split .paragraph__media img {
+  border-radius: var(--paragraph-radius);
+}
+
+/* Variant: framed (centered card). */
+.paragraph--hero--framed {
+  text-align: center;
+  border: 1px solid var(--paragraph-border);
+  background-color: var(--color--white);
+}
+
+.paragraph--hero--framed .paragraph__content {
+  margin-inline: auto;
+}
+
+.paragraph--hero--framed .paragraph__actions {
+  justify-content: center;
+}
+
+.paragraph--hero--framed .paragraph__media {
+  max-width: 44rem;
+  margin-inline: auto;
+}

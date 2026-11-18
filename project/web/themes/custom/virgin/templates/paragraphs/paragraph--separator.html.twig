@@ -1,0 +1,52 @@
+{#
+/**
+ * @file
+ * Paragraph "Séparateur / Espace" (separator).
+ *
+ * List fields driving the display:
+ * - field_separator_type: spacing (default) | line | decorative
+ *   -> paragraph--separator--{value}
+ * - field_spacing_top: none | small | medium (default) | large | extra_large
+ *   -> paragraph--spacing-top-{value}
+ * - field_spacing_bottom: same values -> paragraph--spacing-bottom-{value}
+ * Display booleans:
+ * - field_show_line -> paragraph--separator--with-line + data-show-line
+ *
+ * "line" (or show_line) outputs an <hr>; "decorative" and "spacing" are
+ * purely visual and hidden from assistive technologies.
+ */
+#}
+{{ attach_library('virgin/paragraphs') }}
+{% set separator_type = paragraph.field_separator_type.value|default('spacing') %}
+{% set spacing_top = paragraph.field_spacing_top.value|default('medium') %}
+{% set spacing_bottom = paragraph.field_spacing_bottom.value|default('medium') %}
+{% set show_line = paragraph.field_show_line.value ? true : false %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--separator',
+    'paragraph--separator--' ~ separator_type|clean_class,
+    'paragraph--spacing-top-' ~ spacing_top|clean_class,
+    'paragraph--spacing-bottom-' ~ spacing_bottom|clean_class,
+    show_line ? 'paragraph--separator--with-line',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% set attributes = attributes.addClass(classes).setAttribute('data-show-line', show_line ? 'true' : 'false') %}
+{% if separator_type != 'line' and not show_line %}
+  {% set attributes = attributes.setAttribute('aria-hidden', 'true') %}
+{% endif %}
+{% block paragraph %}
+  <div{{ attributes }}>
+    {% block content %}
+      {% if separator_type == 'decorative' %}
+        <div class="paragraph__ornament" aria-hidden="true"></div>
+      {% elseif separator_type == 'line' or show_line %}
+        <hr class="paragraph__line">
+      {% endif %}
+      {{ content|without('field_separator_type', 'field_spacing_top', 'field_spacing_bottom', 'field_show_line') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

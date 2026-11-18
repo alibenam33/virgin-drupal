@@ -1,0 +1,9 @@
+uuid: 6ddf3a27-2a26-4c8e-a4dd-2bdfbef5bb1f
+langcode: fr
+status: true
+dependencies: {  }
+name: Localisations
+vid: locations
+description: 'Organisation géographique'
+weight: 0
+new_revision: false

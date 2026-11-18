@@ -1,0 +1,66 @@
+# Global theme styles (loaded on every page).
+global:
+  version: VERSION
+  css:
+    theme:
+      css/base.css: {}
+
+# Paragraph components: shared base + one stylesheet per paragraph type.
+# Attached from each paragraph--*.html.twig template.
+paragraphs:
+  version: VERSION
+  css:
+    component:
+      css/paragraphs/paragraph.css: {}
+      css/paragraphs/accordion.css: {}
+      css/paragraphs/call-to-action.css: {}
+      css/paragraphs/card.css: {}
+      css/paragraphs/cards-grid.css: {}
+      css/paragraphs/contact.css: {}
+      css/paragraphs/downloads.css: {}
+      css/paragraphs/embed.css: {}
+      css/paragraphs/hero.css: {}
+      css/paragraphs/image.css: {}
+      css/paragraphs/image-gallery.css: {}
+      css/paragraphs/quote.css: {}
+      css/paragraphs/separator.css: {}
+      css/paragraphs/tabs.css: {}
+      css/paragraphs/testimonial.css: {}
+      css/paragraphs/text-content.css: {}
+      css/paragraphs/video.css: {}
+
+paragraphs.accordion:
+  version: VERSION
+  js:
+    js/accordion.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - virgin/paragraphs
+
+paragraphs.tabs:
+  version: VERSION
+  js:
+    js/tabs.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - virgin/paragraphs
+
+paragraphs.lightbox:
+  version: VERSION
+  js:
+    js/lightbox.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - virgin/paragraphs
+
+paragraphs.video:
+  version: VERSION
+  js:
+    js/video.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - virgin/paragraphs

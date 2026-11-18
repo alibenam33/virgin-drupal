@@ -1,0 +1,75 @@
+/**
+ * @file
+ * Paragraphs "accordion" and "accordion_item".
+ * Modifiers: paragraph--accordion--multiple-open / --single-open,
+ * paragraph--accordion--first-item-open (behavior in js/accordion.js).
+ */
+
+.paragraph--accordion > .paragraph__items {
+  border-block-start: 1px solid var(--paragraph-border);
+}
+
+.paragraph--accordion-item {
+  border-block-end: 1px solid var(--paragraph-border);
+}
+
+.paragraph--accordion-item .paragraph__heading {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.paragraph--accordion-item .paragraph__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp1);
+  width: 100%;
+  padding: var(--sp1) 0;
+  cursor: pointer;
+  text-align: start;
+  color: var(--color-text-neutral-loud);
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+}
+
+.paragraph--accordion-item .paragraph__trigger:hover {
+  color: var(--color-text-primary-medium);
+}
+
+.paragraph--accordion-item .paragraph__trigger:focus-visible {
+  outline: 3px solid var(--color--primary-60);
+  outline-offset: 2px;
+}
+
+/* Without JS the trigger is inert: no pointer, no icon. */
+.paragraph--accordion:not(.is-enhanced) .paragraph__trigger {
+  cursor: default;
+}
+
+.paragraph--accordion:not(.is-enhanced) .paragraph__trigger-icon {
+  display: none;
+}
+
+.paragraph--accordion-item .paragraph__trigger-icon {
+  flex: 0 0 auto;
+  width: 0.75rem;
+  height: 0.75rem;
+  transition: transform 0.2s ease;
+  transform: rotate(45deg);
+  border-block-end: 2px solid currentcolor;
+  border-inline-end: 2px solid currentcolor;
+}
+
+.paragraph--accordion-item .paragraph__trigger[aria-expanded="true"] .paragraph__trigger-icon {
+  transform: rotate(-135deg);
+}
+
+.paragraph--accordion-item .paragraph__panel {
+  padding-block-end: var(--sp1);
+}
+
+.paragraph--accordion-item .paragraph__panel[hidden] {
+  display: none;
+}

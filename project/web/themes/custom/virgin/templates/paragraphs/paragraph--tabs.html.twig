@@ -1,0 +1,53 @@
+{#
+/**
+ * @file
+ * Paragraph "Onglets" (tabs).
+ *
+ * List fields driving the display:
+ * - field_orientation: horizontal (default) | vertical
+ *   -> paragraph--tabs--{value} + aria-orientation on the tablist
+ *
+ * Progressive enhancement: without JavaScript the tab items are displayed as
+ * stacked sections with their headings. js/tabs.js builds the role="tab"
+ * buttons inside the (initially hidden) role="tablist" element from the
+ * rendered tab items, and turns them into role="tabpanel" (WAI-ARIA tabs
+ * pattern, automatic activation, arrow/Home/End keys).
+ */
+#}
+{{ attach_library('virgin/paragraphs.tabs') }}
+{% set orientation = paragraph.field_orientation.value|default('horizontal') %}
+{% set has_title = not paragraph.field_title.isEmpty() %}
+{% set title_id = 'tabs-title'|clean_unique_id %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--tabs',
+    'paragraph--tabs--' ~ orientation|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes).setAttribute('data-tabs', '').setAttribute('data-orientation', orientation) }}>
+    {% block content %}
+      {% if has_title or not paragraph.field_intro.isEmpty() %}
+        <div class="paragraph__header">
+          {% if has_title %}
+            <h2 class="paragraph__title" id="{{ title_id }}">{{ content.field_title }}</h2>
+          {% endif %}
+          {% if not paragraph.field_intro.isEmpty() %}
+            <div class="paragraph__intro text-content">{{ content.field_intro }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if not paragraph.field_tabs.isEmpty() %}
+        <div class="paragraph__tabs-wrapper">
+          <div class="paragraph__tablist" role="tablist" aria-orientation="{{ orientation }}"{% if has_title %} aria-labelledby="{{ title_id }}"{% endif %} data-tablist hidden></div>
+          <div class="paragraph__panels" data-tab-panels>{{ content.field_tabs }}</div>
+        </div>
+      {% endif %}
+      {{ content|without('field_title', 'field_intro', 'field_tabs', 'field_orientation') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

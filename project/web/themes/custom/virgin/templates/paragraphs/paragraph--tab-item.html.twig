@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * Paragraph "Élément d'onglet" (tab_item).
+ *
+ * Rendered as a section with a heading; js/tabs.js uses the heading as the
+ * tab label, field_icon (data-tab-icon) as a decorative icon, and adds the
+ * role="tabpanel" / aria-labelledby attributes.
+ */
+#}
+{{ attach_library('virgin/paragraphs.tabs') }}
+{% set tab_id = ('tab-' ~ paragraph.id())|clean_unique_id %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--tab-item',
+    not paragraph.field_icon.isEmpty() ? 'paragraph--has-icon',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% set attributes = attributes.addClass(classes).setAttribute('id', tab_id ~ '-panel').setAttribute('data-tab-panel', '').setAttribute('data-tab-id', tab_id) %}
+{% if not paragraph.field_icon.isEmpty() %}
+  {% set attributes = attributes.setAttribute('data-tab-icon', paragraph.field_icon.value|clean_class) %}
+{% endif %}
+{% block paragraph %}
+  <div{{ attributes }}>
+    {% block content %}
+      <h3 class="paragraph__tab-title" data-tab-title>{{ content.field_title }}</h3>
+      <div class="paragraph__body text-content">{{ content.field_body }}</div>
+      {{ content|without('field_title', 'field_body', 'field_icon') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

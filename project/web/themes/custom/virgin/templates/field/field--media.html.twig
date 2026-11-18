@@ -1,0 +1,12 @@
+{#
+/**
+ * @file
+ * Field template for media fields (see virgin.theme).
+ *
+ * Outputs the field items only: the media source label ("Image",
+ * "Document"...) would otherwise be announced before every media.
+ */
+#}
+{% for item in items %}
+  {{- item.content -}}
+{% endfor %}

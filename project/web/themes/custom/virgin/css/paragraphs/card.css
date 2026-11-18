@@ -1,0 +1,79 @@
+/**
+ * @file
+ * Paragraph "card".
+ * Variants: default | horizontal | vertical | bordered.
+ * The parent grid variant (cards-grid.css) can also drive the card layout.
+ */
+
+.paragraph--card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--paragraph-radius);
+  background-color: var(--color--white);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.12);
+}
+
+.paragraph--card .paragraph__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: var(--sp1-5);
+}
+
+.paragraph--card .paragraph__actions {
+  margin-block-start: auto;
+  padding-block-start: var(--sp1);
+}
+
+.paragraph--card .paragraph__media img {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.paragraph--card .paragraph__icon {
+  display: inline-block;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-block-end: var(--sp0-75);
+  border-radius: 50%;
+  background-color: var(--color--primary-80);
+}
+
+/* Variant: vertical (explicit stacked layout, centered). */
+.paragraph--card--vertical {
+  text-align: center;
+}
+
+.paragraph--card--vertical .paragraph__icon {
+  margin-inline: auto;
+}
+
+/* Variant: horizontal (image beside the content from 500px). */
+@media (min-width: 500px) {
+  .paragraph--card--horizontal.paragraph--has-image {
+    flex-direction: row;
+  }
+
+  .paragraph--card--horizontal .paragraph__media {
+    flex: 0 0 40%;
+  }
+
+  .paragraph--card--horizontal .paragraph__media img {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+}
+
+/* Variant: bordered. */
+.paragraph--card--bordered {
+  border: 1px solid var(--paragraph-border);
+  box-shadow: none;
+}
+
+/* Highlight the card while its link has the focus. */
+.paragraph--card.paragraph--has-link:focus-within {
+  outline: 3px solid var(--color--primary-60);
+  outline-offset: 2px;
+}

@@ -1,0 +1,67 @@
+{#
+/**
+ * @file
+ * Paragraph "Call to Action" (call_to_action).
+ *
+ * List fields driving the display:
+ * - field_cta_display_variant: primary (default) | secondary | highlight
+ *   | image_background -> paragraph--call-to-action--{value}
+ * - field_alignment: left (default) | center | right
+ *   -> paragraph--align-{value}
+ *
+ * With the "image_background" variant the image becomes a decorative
+ * background layer; otherwise it is displayed next to the content.
+ */
+#}
+{{ attach_library('virgin/paragraphs') }}
+{% set variant = paragraph.field_cta_display_variant.value|default('primary') %}
+{% set alignment = paragraph.field_alignment.value|default('left') %}
+{% set has_image = not paragraph.field_image.isEmpty() %}
+{% set image_as_background = has_image and variant == 'image_background' %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--call-to-action',
+    'paragraph--call-to-action--' ~ variant|clean_class,
+    'paragraph--align-' ~ alignment|clean_class,
+    image_as_background ? 'paragraph--has-background',
+    has_image and not image_as_background ? 'paragraph--has-image',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% set button_classes = variant == 'secondary' ? ['button', 'paragraph__button'] : ['button', 'button--primary', 'paragraph__button'] %}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {% if image_as_background %}
+        <div class="paragraph__background" aria-hidden="true">{{ content.field_image }}</div>
+      {% endif %}
+      <div class="paragraph__inner">
+        {% if has_image and not image_as_background %}
+          <div class="paragraph__media">{{ content.field_image }}</div>
+        {% endif %}
+        <div class="paragraph__content">
+          {% if not paragraph.field_eyebrow.isEmpty() %}
+            <p class="paragraph__eyebrow">{{ content.field_eyebrow }}</p>
+          {% endif %}
+          <h2 class="paragraph__title">{{ content.field_title }}</h2>
+          {% if not paragraph.field_description.isEmpty() %}
+            <div class="paragraph__body text-content">{{ content.field_description }}</div>
+          {% endif %}
+          {% if not paragraph.field_cta_link.isEmpty() %}
+            <div class="paragraph__actions">
+              {% if not paragraph.field_cta_label.isEmpty() %}
+                {{ link(paragraph.field_cta_label.value, paragraph.field_cta_link.0.url, {'class': button_classes}) }}
+              {% else %}
+                {{ content.field_cta_link }}
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      {{ content|without('field_eyebrow', 'field_title', 'field_description', 'field_image', 'field_cta_label', 'field_cta_link', 'field_cta_display_variant', 'field_alignment') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

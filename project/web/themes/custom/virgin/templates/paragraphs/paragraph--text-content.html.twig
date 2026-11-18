@@ -1,0 +1,46 @@
+{#
+/**
+ * @file
+ * Paragraph "Texte / Contenu éditorial" (text_content).
+ *
+ * List fields driving the display:
+ * - field_alignment: left (default) | center | right
+ *   -> paragraph--align-{value}
+ * - field_content_width: narrow | medium (default) | wide | full
+ *   -> paragraph--width-{value}
+ *
+ * @see modules/contrib/paragraphs/templates/paragraph.html.twig
+ */
+#}
+{{ attach_library('virgin/paragraphs') }}
+{% set alignment = paragraph.field_alignment.value|default('left') %}
+{% set width = paragraph.field_content_width.value|default('medium') %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--text-content',
+    'paragraph--align-' ~ alignment|clean_class,
+    'paragraph--width-' ~ width|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      <div class="paragraph__inner">
+        {% if not paragraph.field_eyebrow.isEmpty() %}
+          <p class="paragraph__eyebrow">{{ content.field_eyebrow }}</p>
+        {% endif %}
+        {% if not paragraph.field_title.isEmpty() %}
+          <h2 class="paragraph__title">{{ content.field_title }}</h2>
+        {% endif %}
+        {% if not paragraph.field_body.isEmpty() %}
+          <div class="paragraph__body text-content">{{ content.field_body }}</div>
+        {% endif %}
+        {{ content|without('field_eyebrow', 'field_title', 'field_body', 'field_alignment', 'field_content_width') }}
+      </div>
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

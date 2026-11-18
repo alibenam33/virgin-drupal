@@ -1,0 +1,63 @@
+{#
+/**
+ * @file
+ * Paragraph "Galerie d'images" (image_gallery).
+ *
+ * List / display fields:
+ * - field_display_mode: grid (default) | masonry | carousel
+ *   -> paragraph--image-gallery--{value}
+ * - field_columns (integer 2-4, default 3) -> paragraph--columns-{n}
+ * - field_enable_lightbox (boolean) -> paragraph--has-lightbox
+ *   + data-lightbox; loads virgin/paragraphs.lightbox.
+ *
+ * Alternative texts come from the media entities. The carousel is a
+ * keyboard-scrollable region (CSS scroll-snap, no JavaScript required).
+ */
+#}
+{{ attach_library('virgin/paragraphs') }}
+{% set display_mode = paragraph.field_display_mode.value|default('grid') %}
+{% set columns = max(2, min(paragraph.field_columns.value|default(3), 4)) %}
+{% set lightbox = paragraph.field_enable_lightbox.value ? true : false %}
+{% if lightbox %}
+  {{ attach_library('virgin/paragraphs.lightbox') }}
+{% endif %}
+{% set has_title = not paragraph.field_title.isEmpty() %}
+{% set title_id = 'image-gallery-title'|clean_unique_id %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--image-gallery',
+    'paragraph--image-gallery--' ~ display_mode|clean_class,
+    'paragraph--columns-' ~ columns,
+    lightbox ? 'paragraph--has-lightbox',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes).setAttribute('data-display-mode', display_mode).setAttribute('data-columns', columns).setAttribute('data-lightbox', lightbox ? 'true' : 'false') }}>
+    {% block content %}
+      {% if has_title or not paragraph.field_intro.isEmpty() %}
+        <div class="paragraph__header">
+          {% if has_title %}
+            <h2 class="paragraph__title" id="{{ title_id }}">{{ content.field_title }}</h2>
+          {% endif %}
+          {% if not paragraph.field_intro.isEmpty() %}
+            <div class="paragraph__intro text-content">{{ content.field_intro }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if not paragraph.field_images.isEmpty() %}
+        {% if display_mode == 'carousel' %}
+          <div class="paragraph__items paragraph__gallery" role="region" tabindex="0"{% if has_title %} aria-labelledby="{{ title_id }}"{% else %} aria-label="{{ 'Image gallery'|t }}"{% endif %}>
+            {{ content.field_images }}
+          </div>
+        {% else %}
+          <div class="paragraph__items paragraph__gallery">{{ content.field_images }}</div>
+        {% endif %}
+      {% endif %}
+      {{ content|without('field_title', 'field_intro', 'field_images', 'field_display_mode', 'field_columns', 'field_enable_lightbox') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

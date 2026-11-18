@@ -1,0 +1,48 @@
+{#
+/**
+ * @file
+ * Paragraph "Documents à télécharger" (downloads).
+ *
+ * Display booleans:
+ * - field_show_file_size -> paragraph--downloads--show-file-size
+ *   + data-show-file-size
+ * - field_show_file_type -> paragraph--downloads--show-file-type
+ *   + data-show-file-type
+ * The file size/type elements are output by file-link.html.twig and shown
+ * or hidden by CSS according to these modifiers.
+ */
+#}
+{{ attach_library('virgin/paragraphs') }}
+{% set show_size = paragraph.field_show_file_size.value ? true : false %}
+{% set show_type = paragraph.field_show_file_type.value ? true : false %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--downloads',
+    show_size ? 'paragraph--downloads--show-file-size',
+    show_type ? 'paragraph--downloads--show-file-type',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes).setAttribute('data-show-file-size', show_size ? 'true' : 'false').setAttribute('data-show-file-type', show_type ? 'true' : 'false') }}>
+    {% block content %}
+      {% if not paragraph.field_title.isEmpty() or not paragraph.field_intro.isEmpty() %}
+        <div class="paragraph__header">
+          {% if not paragraph.field_title.isEmpty() %}
+            <h2 class="paragraph__title">{{ content.field_title }}</h2>
+          {% endif %}
+          {% if not paragraph.field_intro.isEmpty() %}
+            <div class="paragraph__intro text-content">{{ content.field_intro }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if not paragraph.field_documents.isEmpty() %}
+        <div class="paragraph__items">{{ content.field_documents }}</div>
+      {% endif %}
+      {{ content|without('field_title', 'field_intro', 'field_documents', 'field_show_file_size', 'field_show_file_type') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

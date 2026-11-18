@@ -1,0 +1,84 @@
+{#
+/**
+ * @file
+ * Paragraph "Contenu embarqué / Embed" (embed).
+ *
+ * List fields driving the display:
+ * - field_provider: youtube | vimeo | google_maps | external_form
+ *   | other (default) -> paragraph--embed--{value}
+ * Other display modifiers:
+ * - field_height (integer, px) -> paragraph--has-fixed-height + iframe
+ *   height; otherwise a ratio per provider is applied in CSS.
+ *
+ * Only https:// URLs are embedded. The iframe always gets a title (field
+ * title or a generic label). The fallback text is rendered as a link to the
+ * external content (or alone when the URL cannot be embedded).
+ */
+#}
+{{ attach_library('virgin/paragraphs') }}
+{% set provider = paragraph.field_provider.value|default('other') %}
+{% set has_url = not paragraph.field_embed_url.isEmpty() %}
+{% set embed_src = has_url ? paragraph.field_embed_url.0.url.toString() : '' %}
+{% set is_embeddable = embed_src starts with 'https://' %}
+{% set height = paragraph.field_height.isEmpty() ? null : max(100, paragraph.field_height.value) %}
+{% set frame_title = paragraph.field_title.isEmpty() ? 'Embedded content'|t : paragraph.field_title.value %}
+{%
+  set frame_attributes = create_attribute({
+    'class': ['paragraph__frame'],
+    'src': embed_src,
+    'title': frame_title,
+    'loading': 'lazy',
+    'referrerpolicy': 'strict-origin-when-cross-origin',
+  })
+%}
+{% if provider in ['youtube', 'vimeo'] %}
+  {% set frame_attributes = frame_attributes.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen').setAttribute('allowfullscreen', true) %}
+{% endif %}
+{% if height %}
+  {% set frame_attributes = frame_attributes.setAttribute('height', height) %}
+{% endif %}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--embed',
+    'paragraph--embed--' ~ provider|clean_class,
+    height ? 'paragraph--has-fixed-height',
+    not is_embeddable ? 'paragraph--embed--fallback',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes).setAttribute('data-provider', provider) }}>
+    {% block content %}
+      {% if not paragraph.field_title.isEmpty() %}
+        <h2 class="paragraph__title">{{ content.field_title }}</h2>
+      {% endif %}
+      {% if not paragraph.field_description.isEmpty() %}
+        <div class="paragraph__body text-content">{{ content.field_description }}</div>
+      {% endif %}
+      {% if is_embeddable %}
+        <div class="paragraph__embed"{% if height %} style="--embed-height: {{ height }}px"{% endif %}>
+          <iframe{{ frame_attributes }}></iframe>
+        </div>
+        {% if not paragraph.field_fallback_text.isEmpty() %}
+          <p class="paragraph__fallback">
+            {{ link(paragraph.field_fallback_text.value, paragraph.field_embed_url.0.url, {'class': ['paragraph__fallback-link']}) }}
+          </p>
+        {% endif %}
+      {% elseif not paragraph.field_fallback_text.isEmpty() or has_url %}
+        <p class="paragraph__fallback">
+          {% if has_url and not paragraph.field_fallback_text.isEmpty() %}
+            {{ link(paragraph.field_fallback_text.value, paragraph.field_embed_url.0.url, {'class': ['paragraph__fallback-link']}) }}
+          {% elseif has_url %}
+            {{ content.field_embed_url }}
+          {% else %}
+            {{ content.field_fallback_text }}
+          {% endif %}
+        </p>
+      {% endif %}
+      {{ content|without('field_title', 'field_description', 'field_embed_url', 'field_provider', 'field_height', 'field_fallback_text') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}
