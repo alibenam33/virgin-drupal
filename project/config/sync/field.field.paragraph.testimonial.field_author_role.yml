@@ -1,0 +1,19 @@
+uuid: 89ac04d5-f491-4e64-9be7-96c41469e0a6
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_author_role
+    - paragraphs.paragraphs_type.testimonial
+id: paragraph.testimonial.field_author_role
+field_name: field_author_role
+entity_type: paragraph
+bundle: testimonial
+label: "Fonction de l'auteur"
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

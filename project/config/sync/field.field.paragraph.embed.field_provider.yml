@@ -1,0 +1,21 @@
+uuid: 1e2db06a-f778-41fc-9543-2acc9c0b598a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_provider
+    - paragraphs.paragraphs_type.embed
+  module:
+    - options
+id: paragraph.embed.field_provider
+field_name: field_provider
+entity_type: paragraph
+bundle: embed
+label: Fournisseur
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,50 @@
+uuid: e28e6b3a-1de8-4164-b55d-b732045baec1
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.separator.field_separator_type
+    - field.field.paragraph.separator.field_show_line
+    - field.field.paragraph.separator.field_spacing_bottom
+    - field.field.paragraph.separator.field_spacing_top
+    - paragraphs.paragraphs_type.separator
+  module:
+    - options
+id: paragraph.separator.default
+targetEntityType: paragraph
+bundle: separator
+mode: default
+content:
+  field_separator_type:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_show_line:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_spacing_bottom:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_spacing_top:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

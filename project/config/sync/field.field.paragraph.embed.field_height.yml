@@ -1,0 +1,23 @@
+uuid: c6a7049d-4123-496b-bb2a-5c57a7218ec1
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_height
+    - paragraphs.paragraphs_type.embed
+id: paragraph.embed.field_height
+field_name: field_height
+entity_type: paragraph
+bundle: embed
+label: Hauteur
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
