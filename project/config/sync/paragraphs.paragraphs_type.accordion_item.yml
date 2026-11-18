@@ -1,0 +1,10 @@
+uuid: 1541aa75-c778-4ed0-a4f6-46588cf585a3
+langcode: fr
+status: true
+dependencies: {  }
+id: accordion_item
+label: "Élément d'accordéon"
+icon_uuid: null
+icon_default: null
+description: "Sous-Paragraph d'un accordéon."
+behavior_plugins: {  }

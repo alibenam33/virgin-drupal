@@ -1,0 +1,10 @@
+uuid: e48981f4-261e-4eb4-9969-16948ef0b192
+langcode: fr
+status: true
+dependencies: {  }
+id: cards_grid
+label: 'Grille de cartes'
+icon_uuid: null
+icon_default: null
+description: 'Présentation de plusieurs cartes.'
+behavior_plugins: {  }

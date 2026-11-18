@@ -1,0 +1,21 @@
+uuid: e9f4006b-b2b5-44eb-a07c-98aa9fbcb319
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_separator_type
+    - paragraphs.paragraphs_type.separator
+  module:
+    - options
+id: paragraph.separator.field_separator_type
+field_name: field_separator_type
+entity_type: paragraph
+bundle: separator
+label: 'Type de séparateur'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

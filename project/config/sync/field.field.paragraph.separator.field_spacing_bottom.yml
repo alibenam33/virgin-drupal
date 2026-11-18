@@ -1,0 +1,21 @@
+uuid: 78d886b3-df6f-4169-957e-06aad193cff3
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spacing_bottom
+    - paragraphs.paragraphs_type.separator
+  module:
+    - options
+id: paragraph.separator.field_spacing_bottom
+field_name: field_spacing_bottom
+entity_type: paragraph
+bundle: separator
+label: 'Espacement inférieur'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

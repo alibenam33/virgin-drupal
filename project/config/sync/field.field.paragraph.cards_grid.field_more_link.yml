@@ -1,0 +1,23 @@
+uuid: 3ce006cc-830e-412c-a84d-beca00aa1189
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_more_link
+    - paragraphs.paragraphs_type.cards_grid
+  module:
+    - link
+id: paragraph.cards_grid.field_more_link
+field_name: field_more_link
+entity_type: paragraph
+bundle: cards_grid
+label: 'Lien complémentaire'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 17
+field_type: link

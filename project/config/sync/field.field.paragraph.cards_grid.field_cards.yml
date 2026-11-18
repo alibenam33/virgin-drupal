@@ -1,0 +1,52 @@
+uuid: 0a4cc0cc-a3e8-44b3-942a-b8deecc7f72e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cards
+    - paragraphs.paragraphs_type.card
+    - paragraphs.paragraphs_type.cards_grid
+  module:
+    - entity_reference_revisions
+id: paragraph.cards_grid.field_cards
+field_name: field_cards
+entity_type: paragraph
+bundle: cards_grid
+label: Cartes
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      card: card
+    negate: 0
+    target_bundles_drag_drop:
+      call_to_action:
+        weight: 9
+        enabled: false
+      card:
+        weight: 10
+        enabled: true
+      cards_grid:
+        weight: 11
+        enabled: false
+      hero:
+        weight: 12
+        enabled: false
+      image:
+        weight: 13
+        enabled: false
+      image_gallery:
+        weight: 14
+        enabled: false
+      text_content:
+        weight: 15
+        enabled: false
+      video:
+        weight: 16
+        enabled: false
+field_type: entity_reference_revisions

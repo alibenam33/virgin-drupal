@@ -1,0 +1,19 @@
+uuid: 350ee721-896f-4773-9354-fafa2970056c
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_fallback_text
+    - paragraphs.paragraphs_type.embed
+id: paragraph.embed.field_fallback_text
+field_name: field_fallback_text
+entity_type: paragraph
+bundle: embed
+label: 'Texte alternatif'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

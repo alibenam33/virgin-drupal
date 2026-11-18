@@ -1,0 +1,21 @@
+uuid: 178e4e73-04b7-49fb-b059-5cf69d24d0c3
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_show_line
+    - paragraphs.paragraphs_type.separator
+id: paragraph.separator.field_show_line
+field_name: field_show_line
+entity_type: paragraph
+bundle: separator
+label: 'Afficher une ligne'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: Activé
+  off_label: Désactivé
+field_type: boolean

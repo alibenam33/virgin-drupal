@@ -1,0 +1,10 @@
+uuid: f75abfda-f951-49d8-ac68-d12de62cd064
+langcode: fr
+status: true
+dependencies: {  }
+id: contact
+label: 'Coordonnées / Contact'
+icon_uuid: null
+icon_default: null
+description: "Coordonnées d'une organisation ou d'un interlocuteur."
+behavior_plugins: {  }

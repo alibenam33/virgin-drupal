@@ -1,0 +1,10 @@
+uuid: 13f0fab9-391e-460a-9b72-34bbf1a97b3e
+langcode: fr
+status: true
+dependencies: {  }
+id: separator
+label: 'Séparateur / Espace'
+icon_uuid: null
+icon_default: null
+description: 'Composant purement graphique pour structurer visuellement une page.'
+behavior_plugins: {  }

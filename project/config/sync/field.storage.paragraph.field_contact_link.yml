@@ -1,0 +1,19 @@
+uuid: 057bcc04-5f76-4124-9002-bd670e98d078
+langcode: fr
+status: true
+dependencies:
+  module:
+    - link
+    - paragraphs
+id: paragraph.field_contact_link
+field_name: field_contact_link
+entity_type: paragraph
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

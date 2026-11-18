@@ -1,0 +1,21 @@
+uuid: 7c2b132c-8c44-4863-ab2e-ec41d7878a57
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spacing_top
+    - paragraphs.paragraphs_type.separator
+  module:
+    - options
+id: paragraph.separator.field_spacing_top
+field_name: field_spacing_top
+entity_type: paragraph
+bundle: separator
+label: 'Espacement supérieur'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

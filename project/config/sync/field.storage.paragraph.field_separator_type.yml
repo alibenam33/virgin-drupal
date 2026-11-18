@@ -1,0 +1,30 @@
+uuid: 3669faec-505c-45cd-82e9-28642df69217
+langcode: fr
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_separator_type
+field_name: field_separator_type
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: spacing
+      label: Spacing
+    -
+      value: line
+      label: Line
+    -
+      value: decorative
+      label: Decorative
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,21 @@
+uuid: 1add135e-b98a-456f-a7f5-d3c496735d50
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_orientation
+    - paragraphs.paragraphs_type.tabs
+  module:
+    - options
+id: paragraph.tabs.field_orientation
+field_name: field_orientation
+entity_type: paragraph
+bundle: tabs
+label: Orientation
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

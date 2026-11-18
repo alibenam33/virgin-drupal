@@ -1,0 +1,23 @@
+uuid: bae2b5f1-288e-4410-adaa-f153ef9ceef8
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_embed_url
+    - paragraphs.paragraphs_type.embed
+  module:
+    - link
+id: paragraph.embed.field_embed_url
+field_name: field_embed_url
+entity_type: paragraph
+bundle: embed
+label: 'URL du contenu externe'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 16
+field_type: link

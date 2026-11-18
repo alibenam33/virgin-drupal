@@ -1,0 +1,10 @@
+uuid: 06b4beb3-2707-4713-a513-d7c2ccba51e9
+langcode: fr
+status: true
+dependencies: {  }
+id: tabs
+label: Onglets
+icon_uuid: null
+icon_default: null
+description: 'Répartition du contenu en plusieurs onglets.'
+behavior_plugins: {  }

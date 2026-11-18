@@ -1,0 +1,10 @@
+uuid: 4e17f5f6-4747-4f38-bf06-2a8c1850ce0e
+langcode: fr
+status: true
+dependencies: {  }
+id: tab_item
+label: "Élément d'onglet"
+icon_uuid: null
+icon_default: null
+description: "Sous-Paragraph d'un composant Onglets."
+behavior_plugins: {  }

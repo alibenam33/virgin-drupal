@@ -1,0 +1,10 @@
+uuid: 84033dd7-3a77-4049-b1ef-bb1ee25fc21d
+langcode: fr
+status: true
+dependencies: {  }
+id: quote
+label: Citation
+icon_uuid: null
+icon_default: null
+description: "Mise en avant d'une citation."
+behavior_plugins: {  }

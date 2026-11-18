@@ -1,0 +1,19 @@
+uuid: c14ce81b-0ac5-4eb5-aa28-a0d087e7fa21
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_link_label
+    - paragraphs.paragraphs_type.download_item
+id: paragraph.download_item.field_link_label
+field_name: field_link_label
+entity_type: paragraph
+bundle: download_item
+label: 'Libellé du lien'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

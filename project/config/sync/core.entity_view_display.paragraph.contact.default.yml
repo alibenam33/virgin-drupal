@@ -1,0 +1,118 @@
+uuid: c8c9dc51-2ed0-4b16-b86f-6b543fc2bf76
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.contact.field_address
+    - field.field.paragraph.contact.field_contact_link
+    - field.field.paragraph.contact.field_email
+    - field.field.paragraph.contact.field_image
+    - field.field.paragraph.contact.field_name
+    - field.field.paragraph.contact.field_organization
+    - field.field.paragraph.contact.field_phone
+    - field.field.paragraph.contact.field_role
+    - field.field.paragraph.contact.field_title
+    - field.field.paragraph.contact.field_website
+    - paragraphs.paragraphs_type.contact
+  module:
+    - address
+    - link
+    - telephone
+id: paragraph.contact.default
+targetEntityType: paragraph
+bundle: contact
+mode: default
+content:
+  field_address:
+    type: address_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_contact_link:
+    type: link
+    label: visually_hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_email:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_name:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_organization:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_phone:
+    type: telephone_link
+    label: visually_hidden
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_role:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_website:
+    type: link
+    label: visually_hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 7
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,10 @@
+uuid: c6735c43-2647-4d74-a5d4-f0c0c2ebdd2c
+langcode: fr
+status: true
+dependencies: {  }
+id: embed
+label: 'Contenu embarqué / Embed'
+icon_uuid: null
+icon_default: null
+description: 'Intégration de contenus externes : vidéo externe, carte, formulaire externe, outil tiers.'
+behavior_plugins: {  }
