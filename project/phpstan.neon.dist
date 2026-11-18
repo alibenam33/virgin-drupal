@@ -1,0 +1,27 @@
+# Configuration PHPStan du projet.
+# Exécution : `lando phpstan` (cwd /app/project).
+# Les extensions (mglaman/phpstan-drupal, deprecation-rules, phpstan-phpunit)
+# sont chargées automatiquement par phpstan/extension-installer.
+#
+# Niveau 2 : détecte méthodes/propriétés inconnues sur tous les types
+# et les PHPDoc invalides, sans exiger un typage strict exhaustif (niveaux 3+)
+# qui produirait beaucoup de bruit avec les APIs Drupal (entités, render arrays).
+# À relever progressivement une fois le code custom stabilisé.
+parameters:
+  level: 2
+  paths:
+    - web/modules/custom
+    - web/themes/custom
+  excludePaths:
+    analyseAndScan:
+      - */node_modules/*
+      - */vendor/*
+  fileExtensions:
+    - php
+    - module
+    - inc
+    - install
+    - theme
+    - profile
+  tmpDir: .phpstan
+  reportUnmatchedIgnoredErrors: false

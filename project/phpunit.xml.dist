@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Configuration PHPUnit du projet (code custom uniquement).
+
+  Exécution : `lando phpunit` (cwd /app/project).
+  Exemples (option testsuite de PHPUnit) :
+    lando phpunit [option testsuite] unit|kernel|functional
+    lando phpunit web/modules/custom/mon_module
+
+  Les valeurs <env> ci-dessous sont les identifiants LOCAUX de Lando.
+  SIMPLETEST_DB et SIMPLETEST_BASE_URL sont forcées (force="true") car la
+  recette Lando drupal10 injecte ses propres valeurs par défaut
+  (mysql://drupal10:...@database/drupal10, https://appserver) qui ne
+  correspondent pas aux identifiants personnalisés du service "database".
+  Pour un autre environnement (CI...), utiliser une copie locale phpunit.xml
+  (non versionnée) ou un autre fichier passé via l'option -c.
+-->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="web/core/tests/bootstrap.php"
+         colors="true"
+         beStrictAboutTestsThatDoNotTestAnything="true"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutChangesToGlobalState="true"
+         failOnRisky="true"
+         failOnWarning="true"
+         displayDetailsOnTestsThatTriggerErrors="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         cacheResult="false"
+         cacheDirectory=".phpunit.cache">
+  <php>
+    <ini name="error_reporting" value="32767"/>
+    <ini name="memory_limit" value="-1"/>
+    <!-- URL du serveur web vue depuis le conteneur appserver. -->
+    <env name="SIMPLETEST_BASE_URL" value="http://appserver" force="true"/>
+    <!-- Base de données Lando locale (service "database"). -->
+    <env name="SIMPLETEST_DB" value="mysql://vd_user:khO4Xk0PmQqn0mRzLIy4wZ@database/vd_database" force="true"/>
+    <!-- Sorties HTML des tests fonctionnels (dossier ignoré par git). -->
+    <env name="BROWSERTEST_OUTPUT_DIRECTORY" value="web/sites/simpletest/browser_output" force="true"/>
+    <env name="BROWSERTEST_OUTPUT_BASE_URL" value=""/>
+    <env name="MINK_DRIVER_CLASS" value=""/>
+    <env name="MINK_DRIVER_ARGS" value=""/>
+    <env name="MINK_DRIVER_ARGS_WEBDRIVER" value=""/>
+  </php>
+  <extensions>
+    <!-- Journalisation HTML des tests fonctionnels. -->
+    <bootstrap class="Drupal\TestTools\Extension\HtmlLogging\HtmlOutputLogger">
+      <parameter name="outputDirectory" value="web/sites/simpletest/browser_output"/>
+      <parameter name="verbose" value="true"/>
+    </bootstrap>
+    <!-- Printer pour dump() en debug. -->
+    <bootstrap class="Drupal\TestTools\Extension\Dump\DebugDump">
+      <parameter name="colors" value="true"/>
+      <parameter name="printCaller" value="true"/>
+    </bootstrap>
+  </extensions>
+  <testsuites>
+    <testsuite name="unit">
+      <directory>web/modules/custom/*/tests/src/Unit</directory>
+      <directory>web/themes/custom/*/tests/src/Unit</directory>
+    </testsuite>
+    <testsuite name="kernel">
+      <directory>web/modules/custom/*/tests/src/Kernel</directory>
+      <directory>web/themes/custom/*/tests/src/Kernel</directory>
+    </testsuite>
+    <testsuite name="functional">
+      <directory>web/modules/custom/*/tests/src/Functional</directory>
+      <directory>web/themes/custom/*/tests/src/Functional</directory>
+    </testsuite>
+    <testsuite name="functional-javascript">
+      <directory>web/modules/custom/*/tests/src/FunctionalJavascript</directory>
+      <directory>web/themes/custom/*/tests/src/FunctionalJavascript</directory>
+    </testsuite>
+  </testsuites>
+  <!-- Périmètre de couverture de code. -->
+  <source ignoreSuppressionOfDeprecations="true">
+    <include>
+      <directory>web/modules/custom</directory>
+    </include>
+    <exclude>
+      <directory>web/modules/custom/*/tests</directory>
+    </exclude>
+  </source>
+</phpunit>

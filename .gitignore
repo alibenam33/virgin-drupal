@@ -1,6 +1,12 @@
 # --- Local, non-versioned folders ---
-/docs/
+/docs/files/
 /.lando/
+
+# Claude Code — configuration locale
+.claude/settings.local.json
+
+# Artefacts éventuels générés par les hooks
+.claude/hooks/*.log
 
 # --- Composer-managed dependencies (reinstalled with `composer install`) ---
 /project/vendor/
@@ -29,6 +35,8 @@
 
 # --- Tooling caches ---
 .phpunit.result.cache
+/project/.phpunit.cache/
+/project/phpunit.xml
 .phpcs-cache
 /project/.phpstan/
 node_modules/

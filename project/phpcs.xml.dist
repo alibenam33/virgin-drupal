@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Configuration PHP_CodeSniffer du projet.
+  Exécution : `lando phpcs` / `lando phpcbf` (cwd /app/project).
+-->
+<ruleset name="virgin_drupal">
+  <description>Standards Drupal et DrupalPractice pour le code custom.</description>
+
+  <file>web/modules/custom</file>
+  <file>web/themes/custom</file>
+
+  <!-- CSS/JS exclus : le front est linté par ses propres outils. -->
+  <arg name="extensions" value="php,module,inc,install,test,profile,theme,info,yml"/>
+  <arg name="colors"/>
+  <arg value="sp"/>
+  <arg name="cache" value=".phpcs-cache"/>
+
+  <exclude-pattern>*/node_modules/*</exclude-pattern>
+  <exclude-pattern>*/vendor/*</exclude-pattern>
+  <exclude-pattern>*.min.js</exclude-pattern>
+
+  <rule ref="Drupal"/>
+  <rule ref="DrupalPractice"/>
+</ruleset>

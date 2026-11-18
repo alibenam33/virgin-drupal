@@ -36,6 +36,7 @@ services:
 tooling:
   composer:
     service: appserver
+    dir: /app/project
     cmd: composer
   php:
     service: appserver
@@ -48,17 +49,21 @@ tooling:
     cmd: /app/project/vendor/bin/drush
   phpunit:
     service: appserver
-    description: Run PHPUnit tests (config phpunit.xml.dist)
-    cmd: /app/vendor/bin/phpunit -c /app/phpunit.xml.dist
+    description: Run PHPUnit tests (config project/phpunit.xml.dist)
+    dir: /app/project
+    cmd: /app/project/vendor/bin/phpunit -c /app/project/phpunit.xml.dist
   phpcs:
     service: appserver
-    description: Check Drupal coding standards (config phpcs.xml.dist)
-    cmd: /app/vendor/bin/phpcs
+    description: Check Drupal coding standards (config project/phpcs.xml.dist)
+    dir: /app/project
+    cmd: /app/project/vendor/bin/phpcs
   phpcbf:
     service: appserver
     description: Auto-fix coding standards violations
-    cmd: /app/vendor/bin/phpcbf
+    dir: /app/project
+    cmd: /app/project/vendor/bin/phpcbf
   phpstan:
     service: appserver
-    description: Static analysis (config phpstan.neon.dist)
-    cmd: /app/vendor/bin/phpstan analyse --memory-limit=1G
+    description: Static analysis (config project/phpstan.neon.dist)
+    dir: /app/project
+    cmd: /app/project/vendor/bin/phpstan analyse --memory-limit=1G
