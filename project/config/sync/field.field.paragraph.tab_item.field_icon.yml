@@ -1,0 +1,19 @@
+uuid: b272aca9-9588-4689-bc88-4666ec4a1458
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_icon
+    - paragraphs.paragraphs_type.tab_item
+id: paragraph.tab_item.field_icon
+field_name: field_icon
+entity_type: paragraph
+bundle: tab_item
+label: Icône
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

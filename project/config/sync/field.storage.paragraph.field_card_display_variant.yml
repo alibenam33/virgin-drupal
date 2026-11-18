@@ -1,0 +1,33 @@
+uuid: 12e86955-b60e-492b-8fd0-8746fb1e7b29
+langcode: fr
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_card_display_variant
+field_name: field_card_display_variant
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: default
+      label: Default
+    -
+      value: horizontal
+      label: Horizontal
+    -
+      value: vertical
+      label: Vertical
+    -
+      value: bordered
+      label: Bordered
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

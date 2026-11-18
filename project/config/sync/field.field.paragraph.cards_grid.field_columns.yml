@@ -1,0 +1,23 @@
+uuid: ba2c8db7-351d-4139-ad1a-a5a19fea2c15
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_columns
+    - paragraphs.paragraphs_type.cards_grid
+id: paragraph.cards_grid.field_columns
+field_name: field_columns
+entity_type: paragraph
+bundle: cards_grid
+label: 'Nombre de colonnes'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 2
+  max: 4
+  prefix: ''
+  suffix: ''
+field_type: integer

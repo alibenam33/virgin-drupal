@@ -1,0 +1,10 @@
+uuid: 14069b67-28a9-4aee-bc15-097147b6af2c
+langcode: fr
+status: true
+dependencies: {  }
+id: accordion
+label: Accordéon
+icon_uuid: null
+icon_default: null
+description: 'Contenu présenté sous forme de blocs dépliables.'
+behavior_plugins: {  }

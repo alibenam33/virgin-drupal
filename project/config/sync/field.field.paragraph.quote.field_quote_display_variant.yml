@@ -1,0 +1,21 @@
+uuid: 7a6e9970-c700-4d24-9bff-90f0945f0055
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_quote_display_variant
+    - paragraphs.paragraphs_type.quote
+  module:
+    - options
+id: paragraph.quote.field_quote_display_variant
+field_name: field_quote_display_variant
+entity_type: paragraph
+bundle: quote
+label: "Variante d'affichage"
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

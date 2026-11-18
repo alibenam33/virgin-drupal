@@ -1,0 +1,21 @@
+uuid: 14526185-66a0-49e1-a109-7241a17912bd
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_show_more_link
+    - paragraphs.paragraphs_type.cards_grid
+id: paragraph.cards_grid.field_show_more_link
+field_name: field_show_more_link
+entity_type: paragraph
+bundle: cards_grid
+label: 'Afficher un lien complémentaire'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: Activé
+  off_label: Désactivé
+field_type: boolean

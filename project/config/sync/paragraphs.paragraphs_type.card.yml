@@ -1,0 +1,10 @@
+uuid: b7ef445c-c069-4d11-a30f-963793d35747
+langcode: fr
+status: true
+dependencies: {  }
+id: card
+label: Carte
+icon_uuid: null
+icon_default: null
+description: 'Sous-composant utilisé dans une grille de cartes.'
+behavior_plugins: {  }

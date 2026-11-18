@@ -1,0 +1,18 @@
+uuid: 16f0416d-d2b7-4a40-bbfa-04f2d617f3a1
+langcode: fr
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_multiple_open
+field_name: field_multiple_open
+entity_type: paragraph
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

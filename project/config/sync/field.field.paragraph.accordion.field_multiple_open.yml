@@ -1,0 +1,21 @@
+uuid: 33b9660f-5baa-41a4-a7fd-4311037c0464
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_multiple_open
+    - paragraphs.paragraphs_type.accordion
+id: paragraph.accordion.field_multiple_open
+field_name: field_multiple_open
+entity_type: paragraph
+bundle: accordion
+label: 'Autoriser plusieurs ouvertures'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: Activé
+  off_label: Désactivé
+field_type: boolean
