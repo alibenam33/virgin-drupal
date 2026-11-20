@@ -11,6 +11,7 @@ dependencies:
     - paragraphs.paragraphs_type.contact
     - paragraphs.paragraphs_type.downloads
     - paragraphs.paragraphs_type.embed
+    - paragraphs.paragraphs_type.embed_view
     - paragraphs.paragraphs_type.hero
     - paragraphs.paragraphs_type.image
     - paragraphs.paragraphs_type.image_gallery
@@ -43,6 +44,7 @@ settings:
       downloads: downloads
       embed: embed
       hero: hero
+      embed_view: embed_view
       image: image
       image_gallery: image_gallery
       quote: quote
@@ -79,6 +81,9 @@ settings:
         enabled: true
       embed:
         weight: 28
+        enabled: true
+      embed_view:
+        weight: 30
         enabled: true
       hero:
         weight: 29

@@ -1,0 +1,99 @@
+{#
+/**
+ * @file
+ * Full page of the "news" (Actualité) content type.
+ *
+ * Based on Olivero's node.html.twig, see its docblock for the available
+ * variables. No node.news.full display is enabled: the fields come from the
+ * node.news.default display, rendered with the "full" view mode.
+ *
+ * Fields:
+ * - field_image: media "image" (style "large", 480px max), rendered without
+ *   wrapper by field--node--field-image--news.html.twig, printed in a figure.
+ * - field_publication_date: <time> element (format "date_fr").
+ * - field_categories: linked term labels, rendered as a list of tags by
+ *   field--node--field-categories--news.html.twig.
+ * - field_summary: standfirst (chapô), displayed below the meta.
+ * - field_content: paragraphs, each one themed by its own template and owning
+ *   its width (see css/paragraphs/paragraph.css).
+ * - Any other field (links...) is printed after the content.
+ *
+ * Title: like Olivero, the page title block prints the <h1> on the node page
+ * (page = TRUE); the title is only printed here when the node is rendered in
+ * the full view mode outside of its own page.
+ *
+ * Blocks are printed only if their rendered output is not empty (the media may
+ * be unpublished or not accessible, a field may be empty).
+ */
+#}
+{{ attach_library('virgin/node.news.full') }}
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'news-full',
+  ]
+%}
+{# Rendered once (cacheability bubbles), then reused below. #}
+{% set image = content.field_image|render %}
+{% set has_image = image|striptags('<img>')|trim is not empty %}
+{% set summary = content.field_summary|render %}
+{% set has_summary = summary|striptags|trim is not empty %}
+{% set publication_date = content.field_publication_date|render %}
+{% set has_date = publication_date|striptags|trim is not empty %}
+{% set categories = content.field_categories|render %}
+{% set has_categories = categories|striptags|trim is not empty %}
+{% set body = content.field_content|render %}
+{% set rest = content|without('field_image', 'field_publication_date', 'field_summary', 'field_categories', 'field_content')|render %}
+<article{{ attributes.addClass(classes) }}>
+  <header class="news-full__header">
+    {{ title_prefix }}
+    {% if label and not page %}
+      <h2{{ title_attributes.addClass('node__title', 'news-full__title') }}>
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+      </h2>
+    {% endif %}
+    {{ title_suffix }}
+
+    {% if has_date or has_categories %}
+      <div class="news-full__meta">
+        {% if has_date %}
+          <div class="news-full__date">{{ publication_date }}</div>
+        {% endif %}
+        {% if has_categories %}
+          <div class="news-full__categories">{{ categories }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if not node.isPublished() %}
+      <p class="news-full__status">{{ 'Unpublished'|t }}</p>
+    {% endif %}
+
+    {% if has_summary %}
+      <div class="news-full__lead">{{ summary }}</div>
+    {% endif %}
+  </header>
+
+  {% if has_image %}
+    <figure class="news-full__media">
+      {{ image }}
+    </figure>
+  {% endif %}
+
+  {% if body|trim is not empty %}
+    <div{{ content_attributes.addClass('node__content', 'news-full__content') }}>
+      {{ body }}
+    </div>
+  {% endif %}
+
+  {% if rest|trim is not empty %}
+    <div class="news-full__footer">
+      {{ rest }}
+    </div>
+  {% endif %}
+</article>

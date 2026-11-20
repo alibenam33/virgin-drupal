@@ -1,0 +1,26 @@
+uuid: 117018db-708b-41d0-a5ab-b3d583fd64d1
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.embed_view.field_view
+    - paragraphs.paragraphs_type.embed_view
+  module:
+    - viewfield
+id: paragraph.embed_view.default
+targetEntityType: paragraph
+bundle: embed_view
+mode: default
+content:
+  field_view:
+    type: viewfield_default
+    label: visually_hidden
+    settings:
+      view_title: visually_hidden
+      always_build_output: false
+      empty_view_title: hidden
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

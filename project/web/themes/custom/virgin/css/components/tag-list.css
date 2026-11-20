@@ -1,0 +1,52 @@
+/**
+ * @file
+ * Tag list: inline list of labels (e.g. taxonomy terms).
+ *
+ * Markup: ul.tag-list > li.tag-list__item, see
+ * templates/field/field--node--field-categories--news.html.twig.
+ * Items may contain a link (linked terms) or plain text.
+ */
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp0-25) var(--sp0-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag-list__item {
+  margin: 0;
+  padding: 0.125rem var(--sp0-5);
+  border-radius: 1rem;
+  background-color: var(--color--primary-80);
+  /* Primary 30 on primary 80: high contrast (Olivero tokens). */
+  color: var(--color-text-primary-loud);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.tag-list__item a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+.tag-list__item a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.tag-list__item a:focus-visible {
+  outline: 2px solid var(--color--primary-50);
+  outline-offset: 2px;
+  border-radius: 1rem;
+}
+
+@media (forced-colors: active) {
+  .tag-list__item {
+    border: 1px solid CanvasText;
+  }
+}

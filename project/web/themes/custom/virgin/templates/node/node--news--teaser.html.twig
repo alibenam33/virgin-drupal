@@ -1,0 +1,77 @@
+{#
+/**
+ * @file
+ * Teaser of the "news" (Actualité) content type, rendered as a card.
+ *
+ * Used by the "news" view (rows rendered with the teaser view mode). Based on
+ * Olivero's node.html.twig, see its docblock for the available variables.
+ *
+ * Fields of the node.news.teaser display:
+ * - field_image: media "image" (style "large"), cropped to 16:9 in CSS.
+ * - field_publication_date: <time> element (format "date_fr").
+ * - field_categories: term labels without link, rendered as a list of tags
+ *   by field--node--field-categories--news.html.twig.
+ *
+ * Reading order: the title comes first in the DOM, the meta is displayed
+ * above it with CSS (order: -1) only.
+ *
+ * The image block is printed only if the rendered field actually outputs an
+ * image (the media may be unpublished or not accessible).
+ *
+ * Accessibility: the title link is the only link of the card (the image is
+ * not linked). The whole card is clickable through a pseudo-element stretched
+ * over the card (see css/node/news-teaser.css), the title remains the
+ * accessible name of the link.
+ */
+#}
+{{ attach_library('virgin/node.news.teaser') }}
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'news-teaser',
+  ]
+%}
+{# Rendered once (cacheability bubbles), then reused below. #}
+{% set image = content.field_image|render %}
+{% set has_image = image|striptags('<img>')|trim is not empty %}
+{% set has_date = not node.field_publication_date.isEmpty() %}
+{% set has_categories = not node.field_categories.isEmpty() %}
+<article{{ attributes.addClass(classes, has_image ? 'news-teaser--has-image') }}>
+  {% if has_image %}
+    <div class="news-teaser__media">
+      {{ image }}
+    </div>
+  {% endif %}
+
+  <div class="news-teaser__body">
+    {{ title_prefix }}
+    {% if label %}
+      <h3{{ title_attributes.addClass('node__title', 'news-teaser__title') }}>
+        <a href="{{ url }}" rel="bookmark" class="news-teaser__link">{{ label }}</a>
+      </h3>
+    {% endif %}
+    {{ title_suffix }}
+
+    {% if has_date or has_categories %}
+      <div class="news-teaser__meta">
+        {% if has_date %}
+          <div class="news-teaser__date">{{ content.field_publication_date }}</div>
+        {% endif %}
+        {% if has_categories %}
+          <div class="news-teaser__categories">{{ content.field_categories }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if not node.isPublished() %}
+      <p class="news-teaser__status">{{ 'Unpublished'|t }}</p>
+    {% endif %}
+
+    {{ content|without('field_image', 'field_publication_date', 'field_categories') }}
+  </div>
+</article>

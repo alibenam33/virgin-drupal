@@ -27,6 +27,7 @@
         "drupal/phonenumber": "^1.0@beta",
         "drupal/search_api": "^1.43",
         "drupal/search_api_solr": "^4.4",
+        "drupal/viewfield": "^3.0@beta",
         "drupal/webform": "^6.3",
         "drush/drush": "^13.8"
     },

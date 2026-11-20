@@ -1,0 +1,43 @@
+{#
+/**
+ * @file
+ * Categories of a "news" node, rendered as a list of tags.
+ *
+ * Applies to every view mode of the "news" content type (field suggestions do
+ * not include the view mode): the label is kept when the display shows it,
+ * the items (linked or not, depending on the formatter) are output as a <ul>
+ * styled by the virgin/tag-list library.
+ * See Olivero's field.html.twig for the available variables.
+ */
+#}
+{{ attach_library('virgin/tag-list') }}
+{%
+  set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+  ]
+%}
+{%
+  set title_classes = [
+    'field__label',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+  ]
+%}
+{% if label_hidden %}
+  <ul{{ attributes.addClass(classes, 'tag-list') }}>
+    {% for item in items %}
+      <li{{ item.attributes.addClass('tag-list__item') }}>{{ item.content }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <div{{ attributes.addClass(classes) }}>
+    <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
+    <ul class="tag-list">
+      {% for item in items %}
+        <li{{ item.attributes.addClass('tag-list__item') }}>{{ item.content }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}

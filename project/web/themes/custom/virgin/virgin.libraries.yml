@@ -64,3 +64,28 @@ paragraphs.video:
     - core/drupal
     - core/once
     - virgin/paragraphs
+
+# Generic UI components, attached from the templates using them.
+tag-list:
+  version: VERSION
+  css:
+    component:
+      css/components/tag-list.css: {}
+
+# Node components: one stylesheet per content type / view mode.
+# Attached from the matching node--*.html.twig template.
+node.news.teaser:
+  version: VERSION
+  css:
+    component:
+      css/node/news-teaser.css: {}
+  dependencies:
+    - virgin/tag-list
+
+node.news.full:
+  version: VERSION
+  css:
+    component:
+      css/node/news-full.css: {}
+  dependencies:
+    - virgin/tag-list

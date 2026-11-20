@@ -1,0 +1,13 @@
+{#
+/**
+ * @file
+ * Main image of a "news" node (media reference), every view mode.
+ *
+ * Outputs the referenced media only, like field--media.html.twig: the
+ * (visually hidden) field label "Image principale" would otherwise be
+ * announced before the image, whose alternative text is enough.
+ */
+#}
+{% for item in items %}
+  {{- item.content -}}
+{% endfor %}

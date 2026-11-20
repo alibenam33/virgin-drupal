@@ -1,0 +1,117 @@
+/**
+ * @file
+ * Full page of the "news" content type (see node--news--full.html.twig).
+ *
+ * Mobile first. The header (meta, standfirst) and the main image follow a
+ * reading column aligned on the start of the content, like the paragraphs
+ * (text paragraphs default to a 52rem "medium" width). The paragraphs keep
+ * the whole content width: each one manages its own width
+ * (paragraph--width-*, see css/paragraphs/paragraph.css).
+ */
+
+.news-full {
+  --news-full-column: 52rem;
+  --news-full-measure: 70ch;
+  --news-full-gap: var(--sp1-5);
+}
+
+@media (min-width: 700px) {
+  .news-full {
+    --news-full-gap: var(--sp2);
+  }
+}
+
+/* Header: optional title, meta, status and standfirst. */
+.news-full__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp1);
+  max-width: var(--news-full-column);
+  margin-block-end: var(--news-full-gap);
+}
+
+/* Title, only printed outside of the node page (the page title block prints
+   the <h1> otherwise). */
+.news-full__title {
+  margin: 0;
+}
+
+/* Meta: publication date and category tags, discreet. */
+.news-full__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp0-5) var(--sp0-75);
+  color: var(--color-text-neutral-soft);
+  font-size: var(--font-size-s);
+  line-height: 1.4;
+}
+
+.news-full__date time {
+  font-weight: 600;
+}
+
+/* Unpublished: text in addition to Olivero's background color. */
+.news-full__status {
+  margin: 0;
+  color: var(--color-text-neutral-medium);
+  font-size: var(--font-size-s);
+  font-weight: 600;
+}
+
+/* Standfirst (chapô). */
+.news-full__lead {
+  max-width: var(--news-full-measure);
+  color: var(--color-text-neutral-loud);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+@media (min-width: 700px) {
+  .news-full__lead {
+    font-size: 1.3125rem;
+  }
+}
+
+/* Olivero's .text-content sets its own color and line height on the field. */
+.news-full__lead .text-content {
+  color: inherit;
+  line-height: inherit;
+}
+
+/* Main image: natural size at most (style "large", 480px), never upscaled,
+   free ratio, aligned on the reading column. Resets Olivero's figure
+   background. */
+.news-full__media {
+  max-width: var(--news-full-column);
+  margin: 0 0 var(--news-full-gap);
+  background: none;
+}
+
+.news-full__media img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+}
+
+/* Content: paragraphs, full content width. The top margin of the first
+   paragraph is replaced by the header / image gap, unless the editor chose a
+   top spacing (paragraph--spacing-top-*). */
+.news-full__content > .field > .field__items > .field__item:first-child > .paragraph:not([class*="paragraph--spacing-top-"]) {
+  margin-block-start: 0;
+}
+
+/* Remaining fields (links...). */
+.news-full__footer {
+  max-width: var(--news-full-column);
+  margin-block-end: var(--news-full-gap);
+}
+
+/* Forced colors: keep the image boundary visible. */
+@media (forced-colors: active) {
+  .news-full__media img {
+    outline: 1px solid CanvasText;
+  }
+}

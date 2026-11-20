@@ -1,0 +1,172 @@
+/**
+ * @file
+ * Teaser of the "news" content type (see node--news--teaser.html.twig).
+ *
+ * Card: 16:9 image, meta (date + category tags) above the title. The title
+ * link is stretched over the whole card (::after) so that the card is
+ * clickable while keeping a single link per teaser.
+ */
+
+.news-teaser {
+  --news-teaser-radius: var(--border-radius);
+  --news-teaser-border: var(--color--gray-90);
+  --news-teaser-focus: var(--color--primary-60);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--news-teaser-border);
+  border-radius: var(--news-teaser-radius);
+  background-color: var(--color--white);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.08);
+  transition: box-shadow 0.2s;
+}
+
+/* Keep Olivero's visual hint for unpublished content. */
+.news-teaser.node--unpublished {
+  background-color: #fff4f4;
+}
+
+/* Media: fixed 16:9 ratio, the image style ("large") does not crop. */
+.news-teaser__media {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background-color: var(--color--gray-95);
+}
+
+.news-teaser__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+/* Body. */
+.news-teaser__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--sp0-75);
+  padding: var(--sp1);
+}
+
+@media (min-width: 700px) {
+  .news-teaser__body {
+    padding: var(--sp1-5);
+  }
+}
+
+/* Meta: publication date and category tags, above the title.
+   Raised above the stretched link so that its text stays selectable. */
+.news-teaser__meta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp0-5) var(--sp0-75);
+  order: -1;
+  color: var(--color-text-neutral-soft);
+  font-size: var(--font-size-s);
+  line-height: 1.4;
+}
+
+.news-teaser__date time {
+  font-weight: 600;
+}
+
+/* Title. */
+.news-teaser__title {
+  margin: 0;
+  color: var(--color-text-neutral-loud);
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* Stretched link: the whole card is the hit area of the title link. */
+.news-teaser__link::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+}
+
+.news-teaser__status {
+  margin: 0;
+  color: var(--color-text-neutral-medium);
+  font-size: var(--font-size-s);
+  font-weight: 600;
+}
+
+/* Contextual links stay above the stretched link. */
+.news-teaser .contextual {
+  z-index: 2;
+}
+
+/* Hover. */
+.news-teaser:hover {
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.16);
+}
+
+.news-teaser:hover .news-teaser__link {
+  color: var(--color-text-primary-medium);
+  background-size: 100% 0.1875rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .news-teaser:hover .news-teaser__media img {
+    transform: scale(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .news-teaser,
+  .news-teaser__media img,
+  .news-teaser__link {
+    transition: none;
+  }
+}
+
+/* Focus: the outline is drawn around the card (fallback: around the link). */
+.news-teaser__link:focus-visible {
+  outline: 3px solid var(--news-teaser-focus);
+  outline-offset: 2px;
+}
+
+@supports selector(:has(*)) {
+  .news-teaser:has(.news-teaser__link:focus-visible) {
+    outline: 3px solid var(--news-teaser-focus);
+    outline-offset: 2px;
+  }
+
+  .news-teaser__link:focus-visible {
+    outline: none;
+  }
+}
+
+/* Forced colors: keep the card and focus boundaries visible. */
+@media (forced-colors: active) {
+  .news-teaser {
+    border-color: CanvasText;
+  }
+}
+
+/* "news" view: Olivero's grid (views-view-grid) keeps the column count set in
+   the view whatever the width; give the cards a usable minimal width so that
+   the grid wraps on small screens, and equal heights per row.
+   Only grids that actually contain news teasers are targeted. Without :has()
+   support, Olivero's default grid applies (no regression). */
+@supports selector(:has(*)) {
+  .view-news .views-view-grid:has(> .views-view-grid__item .news-teaser) {
+    --views-grid--layout-gap: var(--sp1-5);
+    --views-grid-item--min-width: min(100%, 16rem);
+  }
+
+  .view-news .views-view-grid__item-inner:has(> .news-teaser) {
+    height: 100%;
+  }
+}

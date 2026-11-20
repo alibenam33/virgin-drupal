@@ -1,0 +1,10 @@
+uuid: 7a897f16-2dff-49aa-b5cb-e28e012dd621
+langcode: fr
+status: true
+dependencies: {  }
+id: embed_view
+label: 'Vue embarquée'
+icon_uuid: null
+icon_default: null
+description: 'Paragraphe de vue embarquée'
+behavior_plugins: {  }
