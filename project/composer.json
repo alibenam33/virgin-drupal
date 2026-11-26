@@ -24,6 +24,7 @@
         "drupal/ctools": "^4.1",
         "drupal/media_directories": "^3.0",
         "drupal/paragraphs": "^1.23",
+        "drupal/pathauto": "^1.16",
         "drupal/phonenumber": "^1.0@beta",
         "drupal/search_api": "^1.43",
         "drupal/search_api_solr": "^4.4",

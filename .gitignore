@@ -18,6 +18,7 @@
 /project/web/libraries/
 /project/web/private/
 /project/drush/Commands/contrib/
+/project/scripts/
 
 # --- Drupal site files and local settings ---
 /project/web/sites/*/files/

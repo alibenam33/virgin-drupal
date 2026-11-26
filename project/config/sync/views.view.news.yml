@@ -221,6 +221,32 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+  block_last_news:
+    id: block_last_news
+    display_title: 'Dernières actualités'
+    display_plugin: block
+    position: 1
+    display_options:
+      title: 'Dernières actualités'
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 3
+      defaults:
+        title: false
+        pager: false
+      display_description: ''
+      display_extenders: {  }
+      block_description: 'Dernières actualités'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
   block_news_all:
     id: block_news_all
     display_title: 'Toutes les actualités'

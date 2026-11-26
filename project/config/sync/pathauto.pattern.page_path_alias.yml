@@ -1,0 +1,23 @@
+uuid: 125586f5-6b65-4dcb-bafe-1aaaa4c8dc3b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.page
+  module:
+    - node
+id: page_path_alias
+label: 'Page path alias'
+type: 'canonical_entities:node'
+pattern: '/[node:title]'
+selection_criteria:
+  feb84351-224c-40e1-b296-7398329e802a:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      page: page
+selection_logic: and
+weight: -5
+relationships: {  }

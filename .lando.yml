@@ -26,6 +26,17 @@ services:
     hosts:
       - database
 
+  search:
+    type: solr:9
+    portforward: 8983
+    core: drupal
+    overrides:
+      image: solr:9.8
+      environment:
+        SOLR_MODULES: extraction,langid,ltr,analysis-extras
+    config:
+      dir: project/web/modules/contrib/search_api_solr/jump-start/solr9/config-set
+
   # MailHog local SMTP catcher.
   mailhog:
     type: mailhog:v1.0.0
