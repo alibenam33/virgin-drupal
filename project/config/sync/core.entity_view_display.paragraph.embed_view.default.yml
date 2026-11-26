@@ -17,7 +17,7 @@ content:
     label: visually_hidden
     settings:
       view_title: visually_hidden
-      always_build_output: false
+      always_build_output: true
       empty_view_title: hidden
     third_party_settings: {  }
     weight: 0
