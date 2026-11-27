@@ -1,0 +1,95 @@
+{#
+/**
+ * @file
+ * Full page of the "page" (Page de base) content type.
+ *
+ * Based on Olivero's node.html.twig, see its docblock for the available
+ * variables. No node.page.full display is enabled: the fields come from the
+ * node.page.default display, rendered with the "full" view mode.
+ *
+ * Additional variable (virgin_preprocess_node()):
+ * - page_header: TRUE when the node is displayed on its own page, outside of
+ *   the front page. The page title block is then hidden
+ *   (virgin_preprocess_page()) and the title is printed as the <h1> of the
+ *   blue page header.
+ *
+ * Page header ("page-header" component, first in the node):
+ * - field_image: media "image", rendered without wrapper by
+ *   field--node--field-image--page.html.twig, printed in a figure.
+ * - field_categories: linked term labels, rendered as a list of tags by
+ *   field--node--field-categories--page.html.twig.
+ * - title: <h1>.
+ * - field_summary: standfirst (chapô).
+ * Then field_content (paragraphs) and any other field (links...).
+ *
+ * Front page (page_header FALSE): Olivero's node.html.twig is used as is, the
+ * layout of the home page is unchanged.
+ *
+ * Blocks are printed only if their rendered output is not empty (the media may
+ * be unpublished or not accessible, a field may be empty).
+ */
+#}
+{% if not page_header %}
+  {% include '@olivero/content/node.html.twig' %}
+{% else %}
+  {{ attach_library('virgin/node.page.full') }}
+  {%
+    set classes = [
+      'node',
+      'node--type-' ~ node.bundle|clean_class,
+      node.isPromoted() ? 'node--promoted',
+      node.isSticky() ? 'node--sticky',
+      not node.isPublished() ? 'node--unpublished',
+      view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+      'page-full',
+    ]
+  %}
+  {# Rendered once (cacheability bubbles), then reused below. #}
+  {% set image = content.field_image|render %}
+  {% set has_image = image|striptags('<img>')|trim is not empty %}
+  {% set summary = content.field_summary|render %}
+  {% set has_summary = summary|striptags|trim is not empty %}
+  {% set categories = content.field_categories|render %}
+  {% set has_categories = categories|striptags|trim is not empty %}
+  {% set body = content.field_content|render %}
+  {% set rest = content|without('field_image', 'field_summary', 'field_categories', 'field_content')|render %}
+  <article{{ attributes.addClass(classes) }}>
+    <header class="page-header{{ has_image ? ' page-header--with-media' }}">
+      <div class="page-header__body">
+        {% if has_categories %}
+          <div class="page-header__categories">{{ categories }}</div>
+        {% endif %}
+
+        {{ title_prefix }}
+        <h1{{ title_attributes.addClass('page-header__title') }}>{{ label }}</h1>
+        {{ title_suffix }}
+
+        {% if not node.isPublished() %}
+          <p class="page-header__status">{{ 'Unpublished'|t }}</p>
+        {% endif %}
+
+        {% if has_summary %}
+          <div class="page-header__summary">{{ summary }}</div>
+        {% endif %}
+      </div>
+
+      {% if has_image %}
+        <figure class="page-header__media">
+          {{ image }}
+        </figure>
+      {% endif %}
+    </header>
+
+    {% if body|trim is not empty %}
+      <div{{ content_attributes.addClass('node__content', 'page-full__content') }}>
+        {{ body }}
+      </div>
+    {% endif %}
+
+    {% if rest|trim is not empty %}
+      <div class="page-full__footer">
+        {{ rest }}
+      </div>
+    {% endif %}
+  </article>
+{% endif %}

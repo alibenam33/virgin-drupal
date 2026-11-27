@@ -19,6 +19,7 @@ paragraphs:
       css/paragraphs/contact.css: {}
       css/paragraphs/downloads.css: {}
       css/paragraphs/embed.css: {}
+      css/paragraphs/embed-view.css: {}
       css/paragraphs/hero.css: {}
       css/paragraphs/image.css: {}
       css/paragraphs/image-gallery.css: {}
@@ -72,6 +73,13 @@ tag-list:
     component:
       css/components/tag-list.css: {}
 
+# Exposed filters panel of the Views exposed forms (news, agenda).
+exposed-filters:
+  version: VERSION
+  css:
+    component:
+      css/components/exposed-filters.css: {}
+
 # Node components: one stylesheet per content type / view mode.
 # Attached from the matching node--*.html.twig template.
 node.news.teaser:
@@ -82,10 +90,24 @@ node.news.teaser:
   dependencies:
     - virgin/tag-list
 
+node.event.teaser:
+  version: VERSION
+  css:
+    component:
+      css/node/event-teaser.css: {}
+
 node.news.full:
   version: VERSION
   css:
     component:
       css/node/news-full.css: {}
+  dependencies:
+    - virgin/tag-list
+
+node.page.full:
+  version: VERSION
+  css:
+    component:
+      css/node/page-full.css: {}
   dependencies:
     - virgin/tag-list

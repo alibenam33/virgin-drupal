@@ -1,0 +1,88 @@
+{#
+/**
+ * @file
+ * Teaser of the "event" (Événement) content type, rendered as a card.
+ *
+ * Same structure and conventions as node--news--teaser.html.twig, so that
+ * both cards look alike when displayed on the same page. Based on Olivero's
+ * node.html.twig, see its docblock for the available variables.
+ *
+ * Fields of the node.event.teaser display:
+ * - field_image: media "image" (style "large"), cropped to 16:9 in CSS.
+ * - field_start_date / field_end_date: <time> elements (format "date_fr"),
+ *   combined into a period: "From <start> to <end>", or the start date alone
+ *   when both dates are equal.
+ * - field_address: city only, see address-plain--node--event--teaser.html.twig.
+ *
+ * The image, date and address items are printed without their field wrapper
+ * (and its visually hidden label): the card provides its own markup.
+ *
+ * Reading order: the title comes first in the DOM, the meta is displayed
+ * above it with CSS (order: -1) only.
+ *
+ * Accessibility: the title link is the only link of the card (the image is
+ * not linked). The whole card is clickable through a pseudo-element stretched
+ * over the card (see css/node/event-teaser.css), the title remains the
+ * accessible name of the link.
+ */
+#}
+{{ attach_library('virgin/node.event.teaser') }}
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'event-teaser',
+  ]
+%}
+{# Rendered once (cacheability bubbles), then reused below. #}
+{% set image = content.field_image.0|render %}
+{% set has_image = image|striptags('<img>')|trim is not empty %}
+{% set start_date = content.field_start_date.0|render %}
+{% set end_date = content.field_end_date.0|render %}
+{% set is_single_day = not end_date or node.field_start_date.value == node.field_end_date.value %}
+{% set city = content.field_address.0|render %}
+{% set has_city = city|striptags|trim is not empty %}
+<article{{ attributes.addClass(classes, has_image ? 'event-teaser--has-image') }}>
+  {% if has_image %}
+    <div class="event-teaser__media">
+      {{ image }}
+    </div>
+  {% endif %}
+
+  <div class="event-teaser__body">
+    {{ title_prefix }}
+    {% if label %}
+      <h3{{ title_attributes.addClass('node__title', 'event-teaser__title') }}>
+        <a href="{{ url }}" rel="bookmark" class="event-teaser__link">{{ label }}</a>
+      </h3>
+    {% endif %}
+    {{ title_suffix }}
+
+    {% if start_date or has_city %}
+      <div class="event-teaser__meta">
+        {% if start_date %}
+          <p class="event-teaser__dates">
+            {%- if is_single_day -%}
+              {{ start_date }}
+            {%- else -%}
+              {{ 'From @start to @end'|t({'@start': start_date, '@end': end_date}, {'context': 'Event date range'}) }}
+            {%- endif -%}
+          </p>
+        {% endif %}
+        {% if has_city %}
+          <p class="event-teaser__location">{{ city }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if not node.isPublished() %}
+      <p class="event-teaser__status">{{ 'Unpublished'|t }}</p>
+    {% endif %}
+
+    {{ content|without('field_image', 'field_start_date', 'field_end_date', 'field_address') }}
+  </div>
+</article>

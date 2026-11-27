@@ -1,0 +1,40 @@
+{#
+/**
+ * @file
+ * Paragraph "Vue embarquée" (embed_view).
+ *
+ * Single field:
+ * - field_view (viewfield): the view/display rendered as is (exposed form,
+ *   results, pager). Its own field wrapper and label are removed by
+ *   templates/field/viewfield--paragraph--field-view--embed-view.html.twig;
+ *   the view title stays controlled by the formatter settings.
+ *
+ * The view keeps the full width of the content region (lists, grids); only
+ * the vertical rhythm is provided by the shared .paragraph styles.
+ *
+ * @see modules/contrib/paragraphs/templates/paragraph.html.twig
+ */
+#}
+{{ attach_library('virgin/paragraphs') }}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph--embed-view',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  ]
+%}
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {% if not paragraph.field_title.isEmpty() %}
+        <h2 class="paragraph__title">{{ content.field_title }}</h2>
+      {% endif %}
+      {% if not paragraph.field_view.isEmpty() %}
+        <div class="paragraph__view">{{ content.field_view }}</div>
+      {% endif %}
+      {{ content|without('field_view') }}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

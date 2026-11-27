@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Summary (chapô) of a "page" node, every view mode.
+ *
+ * Printed in the page header right below the <h1>: the (visually hidden)
+ * field label "Résumé" is not output, it would only be noise for screen
+ * readers. Keeps Olivero's text-content styles for the formatted text.
+ * See Olivero's field.html.twig for the available variables.
+ */
+#}
+{%
+  set classes = [
+    'text-content',
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {% for item in items %}
+    {{ item.content }}
+  {% endfor %}
+</div>

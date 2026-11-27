@@ -21,6 +21,7 @@ settings:
   force_default: false
   allowed_views:
     news: news
+    agenda: agenda
     block_content: '0'
     comment: '0'
     content: '0'
