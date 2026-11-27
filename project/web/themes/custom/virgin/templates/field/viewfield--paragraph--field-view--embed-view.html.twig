@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * Viewfield "field_view" of the "embed_view" paragraph.
+ *
+ * Same principle as field--paragraph.html.twig: outputs the items only,
+ * without the field wrapper nor the field label ("Vue"), which is technical
+ * and would be read by screen readers before the view. The semantic wrapper
+ * is provided by paragraph--embed-view.html.twig. Each item keeps the
+ * viewfield_item wrapper (view title, as configured in the formatter).
+ *
+ * Suggestion provided by viewfield_theme_suggestions_viewfield().
+ */
+#}
+{{ title_prefix }}
+{{ title_suffix }}
+{% for item in items %}
+  {{- item -}}
+{% endfor %}

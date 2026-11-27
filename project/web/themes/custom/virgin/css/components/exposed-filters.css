@@ -1,0 +1,211 @@
+/**
+ * @file
+ * Exposed filters panel: reusable component for Views exposed forms.
+ *
+ * Light blue panel with a heading, fields of equal width and height, and the
+ * actions aligned on the bottom of the fields. Used by:
+ * - templates/views/views-exposed-form--news--block-all-news.html.twig;
+ * - templates/views/views-exposed-form--agenda--block-all-events.html.twig.
+ *
+ * Markup: form.views-exposed-form > div.exposed-filters
+ * > h2.exposed-filters__title + div.exposed-filters__fields
+ * > (.form-item)* + .form-actions.
+ *
+ * Buttons are targeted through their data-drupal-selector, built by Views from
+ * the view id: "edit-submit-{view}" (primary) and "edit-reset-{view}"
+ * (secondary, only when the reset button is enabled).
+ *
+ * Colors are built from Olivero tokens. Contrasts (WCAG AA):
+ * - text gray-5 / title primary-30 on the light blue background: > 10:1;
+ * - field borders gray-45 on white / light blue: > 4.5:1 (>= 3:1 required);
+ * - primary button: white on primary-40: > 5:1.
+ */
+
+.exposed-filters {
+  --exposed-filters-bg: hsl(var(--color--primary-hue), var(--color--primary-saturation), 96%);
+  --exposed-filters-border: var(--color--primary-80);
+  --exposed-filters-field-border: var(--color--gray-45);
+  --exposed-filters-focus: var(--color--primary-40);
+}
+
+/* Override Olivero ".form--inline > *" (inline-block children).
+   No bottom margin: the space before the results is Olivero's ".view" grid
+   gap (core/themes/olivero/css/layout/views.css), not stacked with it. */
+.views-exposed-form .exposed-filters {
+  display: block;
+  margin-block: 0;
+  padding: var(--sp1) var(--sp1);
+  color: var(--color-text-neutral-loud);
+  border: 1px solid var(--exposed-filters-border);
+  border-radius: calc(4 * var(--border-radius));
+  background-color: var(--exposed-filters-bg);
+  box-shadow: 0 2px 6px hsla(var(--color--primary-hue), 40%, 30%, 0.08);
+}
+
+.exposed-filters__title {
+  margin-block: 0 var(--sp1);
+  padding-block-end: var(--sp0-5);
+  color: var(--color-text-primary-loud);
+  border-block-end: 2px solid var(--exposed-filters-border);
+  font-size: var(--font-size-l);
+  font-weight: 700;
+  line-height: var(--line-height-s);
+}
+
+/* Mobile first: fields and actions stacked, full width. */
+.exposed-filters__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp1);
+}
+
+.views-exposed-form .exposed-filters__fields > .form-item,
+.views-exposed-form .exposed-filters__fields > .form-actions {
+  display: block;
+  margin: 0;
+}
+
+.exposed-filters .form-item__label {
+  margin-block: 0 var(--sp0-25);
+  color: var(--color-text-neutral-loud);
+  font-size: var(--font-size-s);
+  font-weight: 700;
+}
+
+/*
+ * Homogeneous inputs and selects: same width (100% of their column, the
+ * "size" attribute and Olivero's "width: auto" on select are neutralized)
+ * and same height as the action buttons.
+ */
+.exposed-filters .form-element {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  height: var(--sp2-5);
+  min-height: var(--sp2-5);
+  border-color: var(--exposed-filters-field-border);
+  background-color: var(--color--white);
+}
+
+.exposed-filters .form-element:hover {
+  border-color: var(--color-text-primary-medium);
+}
+
+/*
+ * Native date/time inputs (e.g. a date filter rendered as type="date"): the
+ * browser adds an inner padding and a calendar icon that change the box size.
+ * Keep the same height, padding and line box as the text fields.
+ */
+.exposed-filters input.form-element[type="date"],
+.exposed-filters input.form-element[type="datetime-local"],
+.exposed-filters input.form-element[type="time"] {
+  min-width: 0;
+  padding-block: 0;
+  line-height: normal;
+}
+
+.exposed-filters input.form-element[type="date"]::-webkit-datetime-edit,
+.exposed-filters input.form-element[type="datetime-local"]::-webkit-datetime-edit,
+.exposed-filters input.form-element[type="time"]::-webkit-datetime-edit {
+  padding: 0;
+}
+
+.exposed-filters input.form-element[type="date"]::-webkit-calendar-picker-indicator,
+.exposed-filters input.form-element[type="datetime-local"]::-webkit-calendar-picker-indicator,
+.exposed-filters input.form-element[type="time"]::-webkit-calendar-picker-indicator {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Actions: primary submit + optional secondary reset. */
+.exposed-filters .form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp0-5);
+}
+
+.exposed-filters .form-actions .button {
+  flex: 1 1 auto;
+  justify-content: center;
+  height: var(--sp2-5);
+  margin: 0;
+  padding-inline: var(--sp1);
+  font-size: var(--font-size-base);
+}
+
+/* Secondary button (reset): Olivero outlined button on white. */
+.exposed-filters .form-actions [data-drupal-selector^="edit-reset-"] {
+  color: var(--color-text-primary-medium);
+  border-color: currentColor;
+  background-color: var(--color--white);
+}
+
+.exposed-filters .form-actions [data-drupal-selector^="edit-reset-"]:hover {
+  color: var(--color-text-primary-loud);
+  background-color: var(--color--white);
+}
+
+/* Primary button (submit). */
+.exposed-filters .form-actions [data-drupal-selector^="edit-submit-"] {
+  color: var(--color--white);
+  border-color: var(--color--primary-40);
+  background-color: var(--color--primary-40);
+}
+
+.exposed-filters .form-actions [data-drupal-selector^="edit-submit-"]:hover {
+  color: var(--color--white);
+  border-color: var(--color--primary-30);
+  background-color: var(--color--primary-30);
+}
+
+/* Visible focus for fields and buttons (contrast >= 3:1 on the panel). */
+.exposed-filters .form-element:focus-visible,
+.exposed-filters .form-actions .button:focus-visible {
+  outline: 3px solid var(--exposed-filters-focus);
+  outline-offset: 2px;
+}
+
+.exposed-filters .form-actions .button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Tablet and up: fields side by side, actions aligned on the field bottom. */
+@media (min-width: 43.75rem) {
+  .views-exposed-form .exposed-filters {
+    padding: var(--sp1-5) var(--sp2);
+  }
+
+  .exposed-filters__title {
+    font-size: 1.375rem;
+    line-height: 1.3;
+  }
+
+  .exposed-filters__fields {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    gap: var(--sp1) var(--sp1-5);
+  }
+
+  /* Equal columns: same basis (0) and growth for every field. */
+  .views-exposed-form .exposed-filters__fields > .form-item {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .views-exposed-form .exposed-filters__fields > .form-actions {
+    flex: 0 0 auto;
+  }
+
+  .exposed-filters .form-actions .button {
+    flex: 0 0 auto;
+  }
+}
+
+/* High contrast mode: keep the panel boundaries visible. */
+@media (forced-colors: active) {
+  .views-exposed-form .exposed-filters {
+    border-color: CanvasText;
+  }
+}

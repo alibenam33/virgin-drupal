@@ -20,3 +20,7 @@ regions:
   content_below: 'Content Below'
   footer_top: 'Footer Top'
   footer_bottom: 'Footer Bottom'
+# Interface translations shipped with the theme (strings used in templates),
+# imported by "drush locale:check && drush locale:update".
+'interface translation project': virgin
+'interface translation server pattern': themes/custom/virgin/translations/%language.po

@@ -1,0 +1,196 @@
+/**
+ * @file
+ * Full page of the "page" content type (see node--page--full.html.twig).
+ *
+ * Mobile first. The page header is a blue block (Olivero primary 30, the dark
+ * shade of the light blue exposed filters panel, see
+ * css/components/exposed-filters.css) printed first in the node: categories,
+ * title, standfirst and main image. Text and image are stacked on mobile, side
+ * by side from 700px.
+ *
+ * Contrasts (WCAG AA):
+ * - white text on primary 30: 6.5:1;
+ * - tags (primary 30 text on primary 80 pill, virgin/tag-list): 5.57:1, pill
+ *   boundary on primary 30: 5.57:1;
+ * - tag focus: white ring around the pill, on primary 30: 6.5:1 (fallback
+ *   without :has(): primary 30 ring inside the pill, on primary 80: 5.57:1);
+ * - other white focus outlines on primary 30: 6.5:1.
+ */
+
+.page-full {
+  --page-full-gap: var(--sp1-5);
+  --page-header-bg: var(--color--primary-30);
+  --page-header-text: var(--color--white);
+  --page-header-focus: var(--color--white);
+}
+
+@media (min-width: 700px) {
+  .page-full {
+    --page-full-gap: var(--sp2);
+  }
+}
+
+/* Page header (blue block). */
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp1-5);
+  margin-block-end: var(--page-full-gap);
+  padding: var(--sp1-5) var(--sp1);
+  color: var(--page-header-text);
+  border-radius: calc(4 * var(--border-radius));
+  background-color: var(--page-header-bg);
+}
+
+.page-header__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp1);
+  min-width: 0;
+}
+
+.page-header__title {
+  margin: 0;
+  color: inherit;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+}
+
+/* Categories: shared tag list. Focus visible against the adjacent colors
+   (>= 3:1, WCAG 1.4.11). Fallback: dark ring on the light pill. */
+.page-header__categories .tag-list__item a:focus-visible {
+  outline: 2px solid var(--page-header-bg);
+  outline-offset: 0;
+}
+
+/* With :has(): white ring around the whole pill, on the dark background. */
+@supports selector(:has(*)) {
+  .page-header__categories .tag-list__item a:focus-visible {
+    outline: none;
+  }
+
+  .page-header__categories .tag-list__item:has(a:focus-visible) {
+    outline: 2px solid var(--page-header-focus);
+    outline-offset: 2px;
+  }
+}
+
+/* Unpublished: text in addition to Olivero's background color. */
+.page-header__status {
+  margin: 0;
+  font-size: var(--font-size-s);
+  font-weight: 600;
+}
+
+/* Standfirst (chapô). Olivero's .text-content sets its own colors. */
+.page-header__summary {
+  max-width: 70ch;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.page-header__summary .text-content,
+.page-header__summary .text-content p {
+  color: inherit;
+  line-height: inherit;
+}
+
+.page-header__summary > :last-child,
+.page-header__summary .text-content > :last-child {
+  margin-block-end: 0;
+}
+
+.page-header__summary a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.page-header__summary a:focus-visible {
+  outline: 2px solid var(--page-header-focus);
+  outline-offset: 2px;
+}
+
+/* Main image: never upscaled, free ratio. Resets Olivero's figure
+   background. */
+.page-header__media {
+  margin: 0;
+  background: none;
+}
+
+.page-header__media img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+}
+
+/* Tablet and up: text and image side by side. */
+@media (min-width: 700px) {
+  .page-header {
+    padding: var(--sp2);
+  }
+
+  .page-header--with-media {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--sp2);
+  }
+
+  .page-header--with-media .page-header__body {
+    flex: 1 1 55%;
+  }
+
+  .page-header--with-media .page-header__media {
+    flex: 1 1 45%;
+    min-width: 0;
+  }
+
+  .page-header__title {
+    font-size: 2.5rem;
+  }
+
+  .page-header__summary {
+    font-size: 1.3125rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .page-header__title {
+    font-size: 3rem;
+  }
+}
+
+/* Content: paragraphs, full content width. The top margin of the first
+   paragraph is replaced by the header gap, unless the editor chose a top
+   spacing (paragraph--spacing-top-*). */
+.page-full__content > .field > .field__items > .field__item:first-child > .paragraph:not([class*="paragraph--spacing-top-"]) {
+  margin-block-start: 0;
+}
+
+/* Remaining fields (links...). */
+.page-full__footer {
+  margin-block-end: var(--page-full-gap);
+}
+
+/* Forced colors: background colors are dropped, keep the block boundaries. */
+@media (forced-colors: active) {
+  .page-header {
+    border: 1px solid CanvasText;
+  }
+
+  .page-header__media img {
+    outline: 1px solid CanvasText;
+  }
+
+  .page-header__categories .tag-list__item a:focus-visible,
+  .page-header__summary a:focus-visible {
+    outline-color: Highlight;
+  }
+
+  /* Separate rule: an unsupported :has() would drop the whole list. */
+  .page-header__categories .tag-list__item:has(a:focus-visible) {
+    outline-color: Highlight;
+  }
+}

@@ -1,0 +1,13 @@
+# French translation of the Virgin theme interface strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: virgin\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n>1);\n"
+
+#: templates/node/node--event--teaser.html.twig
+msgctxt "Event date range"
+msgid "From @start to @end"
+msgstr "Du @start au @end"

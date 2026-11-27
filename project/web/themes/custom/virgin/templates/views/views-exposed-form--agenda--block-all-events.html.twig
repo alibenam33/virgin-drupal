@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Exposed form of the "agenda" view, "block_all_events" display.
+ *
+ * Wraps the exposed filters (keywords, start date) and the actions in the
+ * reusable light blue "exposed filters" panel with a heading (library
+ * virgin/exposed-filters). The suggestion
+ * "views_exposed_form__agenda__block_all_events" is provided by Views
+ * (ViewExecutable::buildThemeFunctions()), no hook is needed.
+ *
+ * This template renders the children of the <form> element: the panel is
+ * therefore printed inside the form, which keeps its id, action and method.
+ * The panel is exposed as a "search" landmark labelled by its heading.
+ *
+ * Available variables:
+ * - form: A render element representing the form.
+ * - q: The 'q' hidden element when clean URLs are off.
+ *
+ * @see template_preprocess_views_exposed_form()
+ * @see views-exposed-form--news--block-all-news.html.twig
+ */
+#}
+{{ attach_library('virgin/exposed-filters') }}
+{% set title_id = 'events-filters-title'|clean_unique_id %}
+{% if q is not empty %}
+  {{ q }}
+{% endif %}
+<div class="exposed-filters" role="search" aria-labelledby="{{ title_id }}">
+  <h2 class="exposed-filters__title" id="{{ title_id }}">{{ 'Filtrer les événements'|t }}</h2>
+  <div class="exposed-filters__fields">
+    {{ form }}
+  </div>
+</div>

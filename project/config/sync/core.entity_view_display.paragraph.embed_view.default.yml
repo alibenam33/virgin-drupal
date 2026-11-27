@@ -3,6 +3,7 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - field.field.paragraph.embed_view.field_title
     - field.field.paragraph.embed_view.field_view
     - paragraphs.paragraphs_type.embed_view
   module:
@@ -12,6 +13,15 @@ targetEntityType: paragraph
 bundle: embed_view
 mode: default
 content:
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 0
+    region: content
   field_view:
     type: viewfield_default
     label: visually_hidden

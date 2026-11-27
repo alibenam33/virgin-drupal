@@ -1,0 +1,15 @@
+{#
+/**
+ * @file
+ * Address of an "event" node in the teaser view mode: city only.
+ *
+ * Overrides the "address_plain" formatter template (suggestion provided by
+ * address_theme_suggestions_address_plain()). For France, the city is stored
+ * in locality.code (locality.name is only set for predefined subdivisions).
+ * See the address module's address-plain.html.twig for the available
+ * variables.
+ */
+#}
+{%- if locality.code -%}
+  <span class="event-teaser__city" translate="no">{{ locality.code }}</span>
+{%- endif -%}

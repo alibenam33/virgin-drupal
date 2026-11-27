@@ -7,6 +7,9 @@
 
 declare(strict_types=1);
 
+use Drupal\Core\Render\Element;
+use Drupal\node\NodeInterface;
+
 /**
  * Implements hook_theme_suggestions_HOOK_alter() for field templates.
  *
@@ -23,5 +26,96 @@ function virgin_theme_suggestions_field_alter(array &$suggestions, array $variab
   $entity_type = $variables['element']['#entity_type'] ?? NULL;
   if (in_array($entity_type, ['paragraph', 'media'], TRUE)) {
     array_splice($suggestions, 1, 0, ['field__' . $entity_type]);
+  }
+}
+
+/**
+ * Tells whether a node gets the "page header" (blue hero with the <h1>).
+ *
+ * Presentation rule only, shared by virgin_preprocess_node() (prints the
+ * header and its <h1>) and virgin_preprocess_page() (hides the page title
+ * block), so that the page always has exactly one <h1>: "page" nodes
+ * displayed on their own canonical route, except the front page which keeps
+ * its layout (title printed by the page title block).
+ *
+ * @param mixed $node
+ *   The node, or any value taken from the route parameters.
+ */
+function _virgin_has_page_header(mixed $node): bool {
+  if (!$node instanceof NodeInterface || $node->bundle() !== 'page') {
+    return FALSE;
+  }
+  $route_match = \Drupal::routeMatch();
+  return $route_match->getRouteName() === 'entity.node.canonical'
+    && (string) $route_match->getRawParameter('node') === (string) $node->id()
+    && !\Drupal::service('path.matcher')->isFrontPage();
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for node templates.
+ *
+ * Exposes "page_header" to node--page--full.html.twig: the template prints
+ * the title (<h1>) in the blue header instead of the page title block.
+ */
+function virgin_preprocess_node(array &$variables): void {
+  if ($variables['node']->bundle() !== 'page' || $variables['view_mode'] !== 'full') {
+    return;
+  }
+  $variables['page_header'] = _virgin_has_page_header($variables['node']);
+  // The output depends on the current route (and its node) and on the front
+  // page.
+  $variables['#cache']['contexts'][] = 'route';
+  $variables['#cache']['contexts'][] = 'url.path.is_front';
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for field templates.
+ *
+ * Main image of the page header: above the fold, so it is loaded eagerly and
+ * with a high priority (LCP) instead of the default lazy loading. The media
+ * is wrapped in an element without cache keys: the media render cache, shared
+ * with the other displays of the media, keeps the lazy loading.
+ */
+function virgin_preprocess_field(array &$variables): void {
+  $element = $variables['element'];
+  if ($element['#field_name'] !== 'field_image'
+    || $element['#entity_type'] !== 'node'
+    || $element['#bundle'] !== 'page'
+    || ($element['#view_mode'] ?? NULL) !== 'full'
+    || !_virgin_has_page_header($element['#object'])) {
+    return;
+  }
+  foreach ($variables['items'] as $delta => $item) {
+    $variables['items'][$delta]['content'] = [
+      'media' => $item['content'],
+      '#post_render' => [
+        static fn($markup): string => str_replace(' loading="lazy"', ' loading="eager" fetchpriority="high"', (string) $markup),
+      ],
+    ];
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page templates.
+ *
+ * Hides the page title block when the node prints its own <h1> in the page
+ * header (same condition as virgin_preprocess_node()), so that the title is
+ * neither duplicated nor printed in two <h1> elements.
+ */
+function virgin_preprocess_page(array &$variables): void {
+  $variables['#cache']['contexts'][] = 'route';
+  $variables['#cache']['contexts'][] = 'url.path.is_front';
+  if (!_virgin_has_page_header($variables['node'] ?? NULL)) {
+    return;
+  }
+  foreach (Element::children($variables['page']) as $region) {
+    if (!is_array($variables['page'][$region])) {
+      continue;
+    }
+    foreach (Element::children($variables['page'][$region]) as $key) {
+      if (($variables['page'][$region][$key]['#plugin_id'] ?? NULL) === 'page_title_block') {
+        $variables['page'][$region][$key]['#access'] = FALSE;
+      }
+    }
   }
 }

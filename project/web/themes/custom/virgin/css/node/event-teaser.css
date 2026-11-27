@@ -1,0 +1,217 @@
+/**
+ * @file
+ * Teaser of the "event" content type (see node--event--teaser.html.twig).
+ *
+ * Card visually consistent with the news teaser (css/node/news-teaser.css):
+ * 16:9 image, meta (period + city) above the title. The title link is
+ * stretched over the whole card (::after) so that the card is clickable while
+ * keeping a single link per teaser.
+ */
+
+.event-teaser {
+  --event-teaser-radius: var(--border-radius);
+  --event-teaser-border: var(--color--gray-90);
+  --event-teaser-focus: var(--color--primary-60);
+  --event-teaser-icon-size: 1rem;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--event-teaser-border);
+  border-radius: var(--event-teaser-radius);
+  background-color: var(--color--white);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.08);
+  transition: box-shadow 0.2s;
+}
+
+/* Keep Olivero's visual hint for unpublished content. */
+.event-teaser.node--unpublished {
+  background-color: #fff4f4;
+}
+
+/* Media: fixed 16:9 ratio, the image style ("large") does not crop. */
+.event-teaser__media {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background-color: var(--color--gray-95);
+}
+
+.event-teaser__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+/* Body. */
+.event-teaser__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--sp0-75);
+  padding: var(--sp1);
+}
+
+@media (min-width: 700px) {
+  .event-teaser__body {
+    padding: var(--sp1-5);
+  }
+}
+
+/* Meta: period and city, above the title.
+   Raised above the stretched link so that its text stays selectable. */
+.event-teaser__meta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp0-25);
+  order: -1;
+  color: var(--color-text-neutral-soft);
+  font-size: var(--font-size-s);
+  line-height: 1.4;
+}
+
+.event-teaser__dates,
+.event-teaser__location {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp0-5);
+  margin: 0;
+}
+
+.event-teaser__dates {
+  color: var(--color-text-neutral-medium);
+}
+
+.event-teaser__dates time {
+  font-weight: 600;
+}
+
+/* Decorative icons (CSS masks, not announced by screen readers). */
+.event-teaser__dates::before,
+.event-teaser__location::before {
+  flex-shrink: 0;
+  width: var(--event-teaser-icon-size);
+  height: var(--event-teaser-icon-size);
+  margin-block-start: 0.1em;
+  content: "";
+  background-color: var(--color--primary-50);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+
+/* Calendar. */
+.event-teaser__dates::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cpath d='M16 2v4M8 2v4M3 10h18'/%3E%3C/svg%3E");
+}
+
+/* Map pin. */
+.event-teaser__location::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E");
+}
+
+/* Title. */
+.event-teaser__title {
+  margin: 0;
+  color: var(--color-text-neutral-loud);
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* Stretched link: the whole card is the hit area of the title link. */
+.event-teaser__link::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+}
+
+.event-teaser__status {
+  margin: 0;
+  color: var(--color-text-neutral-medium);
+  font-size: var(--font-size-s);
+  font-weight: 600;
+}
+
+/* Contextual links stay above the stretched link. */
+.event-teaser .contextual {
+  z-index: 2;
+}
+
+/* Hover. */
+.event-teaser:hover {
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.16);
+}
+
+.event-teaser:hover .event-teaser__link {
+  color: var(--color-text-primary-medium);
+  background-size: 100% 0.1875rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .event-teaser:hover .event-teaser__media img {
+    transform: scale(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .event-teaser,
+  .event-teaser__media img,
+  .event-teaser__link {
+    transition: none;
+  }
+}
+
+/* Focus: the outline is drawn around the card (fallback: around the link). */
+.event-teaser__link:focus-visible {
+  outline: 3px solid var(--event-teaser-focus);
+  outline-offset: 2px;
+}
+
+@supports selector(:has(*)) {
+  .event-teaser:has(.event-teaser__link:focus-visible) {
+    outline: 3px solid var(--event-teaser-focus);
+    outline-offset: 2px;
+  }
+
+  .event-teaser__link:focus-visible {
+    outline: none;
+  }
+}
+
+/* Forced colors: keep the card, focus boundaries and icons visible. */
+@media (forced-colors: active) {
+  .event-teaser {
+    border-color: CanvasText;
+  }
+
+  .event-teaser__dates::before,
+  .event-teaser__location::before {
+    background-color: CanvasText;
+  }
+}
+
+/* Views grids of event teasers (e.g. "agenda" view, homepage block): Olivero's
+   grid (views-view-grid) keeps the column count set in the view whatever the
+   width; give the cards a usable minimal width so that the grid wraps on small
+   screens, and equal heights per row (the card's height: 100% needs a sized
+   parent). Same rule as css/node/news-teaser.css, but not tied to a view name:
+   any grid that actually contains event teasers is targeted. ".view" keeps
+   the same specificity as the news rule. Without :has() support, Olivero's
+   default grid applies (no regression). */
+@supports selector(:has(*)) {
+  .view .views-view-grid:has(> .views-view-grid__item .event-teaser) {
+    --views-grid--layout-gap: var(--sp1-5);
+    --views-grid-item--min-width: min(100%, 16rem);
+  }
+
+  .view .views-view-grid__item-inner:has(> .event-teaser) {
+    height: 100%;
+  }
+}

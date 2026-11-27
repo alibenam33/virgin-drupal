@@ -1,0 +1,19 @@
+/**
+ * @file
+ * Paragraph "embed_view".
+ * Wraps a view rendered by the viewfield field (.paragraph__view).
+ *
+ * The view uses the full width of the content region (no max-width, like the
+ * cards grid); the vertical rhythm comes from .paragraph (paragraph.css).
+ * The inner spacing (exposed form / results / pager) is left to the view
+ * (Olivero's .view grid gap) to avoid stacking margins.
+ */
+
+.paragraph--embed-view > .paragraph__view {
+  min-width: 0;
+}
+
+/* The view must not add an outer margin to the paragraph rhythm. */
+.paragraph--embed-view .paragraph__view .view {
+  margin-block: 0;
+}
